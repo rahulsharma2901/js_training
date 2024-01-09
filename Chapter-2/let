@@ -1,7 +1,0 @@
-function f() {
-    let b = 20;
-    var a = b;
-    console.log(b);
-    console.log(a);
-}
-f();

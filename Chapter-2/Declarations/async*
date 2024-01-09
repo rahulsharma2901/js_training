@@ -1,0 +1,16 @@
+async function*  foo() {
+    yield await Promise.resolve('a');
+    yield await Promise.resolve('b');
+    yield await Promise.resolve('c');
+    yield await Promise.resolve('d');
+}
+let string = '';
+
+async function generate() {
+    for await (const val of foo()) {
+        string = string + ' ' + val;
+    }
+    console.log(string);
+}
+
+generate();

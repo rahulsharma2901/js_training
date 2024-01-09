@@ -1,0 +1,6 @@
+const n = parseInt(prompt("The first number would be:"))
+const m = parseInt(prompt("The second number would be:"))
+
+const prod = n*m
+
+console.log(`The product of ${n} and ${m} is ${prod}`)

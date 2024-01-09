@@ -1,0 +1,6 @@
+function codeHoist() {
+    a = 10;
+}
+codeHoist();
+console.log(a);
+console.log(b);

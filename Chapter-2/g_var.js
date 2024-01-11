@@ -1,14 +1,16 @@
-var a = 20;
-var b = 30;
+var _abc = "abc";
+console.log(_abc);
+str = "\n";
+console.log(str);
 
-function f() {
-    let c = a*b;
-    console.log(c);
-}
-f();
+var abc = "bcd";
+var ABC = "def";
 
-function x() {
-    let c = a+b;
-    console.log(c);
-}
-x();
+console.log(abc);
+console.log(ABC);
+console.log(abc == ABC);
+console.log(str);
+
+firstName = "Rahul"
+lastName = "Sharma"
+console.log(firstName + ' ' + lastName)

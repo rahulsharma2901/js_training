@@ -29,3 +29,32 @@ console.log(a);
 
 map1.clear();
 console.log(map1);
+console.log(a);
+
+let map2 = new Map();
+map2.set('name', 'Jack');
+map2.set('age', '28');
+for(let [key,value] of map2){
+    console.log(key, ": ", value);
+}
+console.log(a);
+
+map2.forEach(function(value, key){
+    console.log(key + ": " + value);
+})
+console.log(a);
+
+for(let key of map2.keys()){
+    console.log(key);
+}
+console.log(a);
+
+for (let values of map2.values()) {
+    console.log(values);
+}
+console.log(a);
+
+for(let elem of map2.entries()){
+    console.log(`${elem[0]}: ${elem[1]}`)
+}
+console.log(a);

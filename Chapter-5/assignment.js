@@ -40,12 +40,12 @@ console.log(f);
 console.log(a);
 
 let g = 5;
-g >>= 2;//gives the binary answer shifted to the right
+g >>= 2;        //gives the binary answer shifted to the right
 console.log(g)
 console.log(a)
 
 let h = 8;
-h >>>= 1;//gives the binary answer shifted to the right while removing the sign of the operand
+h >>>= 1;       //gives the binary answer shifted to the right while removing the sign of the operand
 console.log(h);
 console.log(a);
 

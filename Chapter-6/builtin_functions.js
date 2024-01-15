@@ -73,7 +73,6 @@ function delayedFunction() {
 }
 setTimeout(delayedFunction, 1000);
 console.log("Waiting for delayed function to be executed...");
-console.log(x);
 
 function repeatedFunction(){
     console.log("Repeated function has been executed!");

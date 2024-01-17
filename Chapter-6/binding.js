@@ -1,5 +1,16 @@
 a = "\n"
 
+//Implicit binding
+const man = {
+    firstName: "Ritesh",
+    years: 22,
+    greet: function(){
+        return `Hello, I am ${this.firstName} and I am ${this.years} years old`;
+    }
+}
+console.log(man.greet());
+console.log(a);
+
 //Call binding
 const person1 = {
     name: "Rahul",

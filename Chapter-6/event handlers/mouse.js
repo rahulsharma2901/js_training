@@ -33,4 +33,4 @@ button5.addEventListener('mousedown', function() {
 const button6 = document.getElementById('button6');
 button6.addEventListener('mousemove', function() {
     this.style.color = "Purple";
-})
+});

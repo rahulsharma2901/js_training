@@ -126,6 +126,32 @@ const animal = new Animal("Frog")
 animal.speak();
 console.log(a)
 
+//Private Class
+class Counter {
+    constructor() {
+        let count = 0;
+        //Private variable
+        const increment = () => {
+            count++;
+        }
+        //Public method to get count
+        this.getCount = () => {
+            return count;
+        }
+        //Public method to increment count
+        this.increment = () => {
+            increment();
+        }
+    }
+}
+const counter = new Counter();
+console.log(counter.getCount());
+counter.increment();
+console.log(counter.getCount());
+counter.increment();
+console.log(counter.getCount());
+console.log(a);
+
 //Async Function Method
 class Async {
     constructor() {

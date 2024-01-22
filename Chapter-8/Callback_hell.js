@@ -16,7 +16,7 @@ const add = (array) => {
 }
 main(add);
 
-//Callback Hell 1
+//Callback Hell
 getUser (function(user) {
     getProfile(user, function(profile) {
         getPosts(user, function(posts) {

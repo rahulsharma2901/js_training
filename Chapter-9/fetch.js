@@ -6,41 +6,10 @@ fetch('https://jsonplaceholder.typicode.com/todos/1')
     .then(data => console.log(data))
     .catch(error => console.log("Error!", error));
 
-//Adding Headers
-const headers = new Headers();
-headers.append('Authorization', 'Bearer the-access-token');
-fetch('http://api.example.com/something/resource/protected', {
-    method: "GET",
-    headers: headers
-})
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => ("Error! Error!", error))
-
-//Aborting a Fetch
-const controller = new AbortController();
-const signal = controller.signal;
-const url = "video.mp4";
-const download = document.querySelector("#download");
-const abort = document.querySelector("#abort");
-download.addEventListener("click", async() => {
-    try {
-        const response = await fetch(url, {signal});
-        console.log("DOWNLOAD COMPLETE!", response);
-    }
-    catch (error) {
-        console.error(`DOWNLOAD ERROR!, ${error.message}`);
-    }
-});
-abort.addEventListener("click", () => {
-    controller.abort();
-    console.log("DOWNLOAD ABORTED!"); 
-})
-
-//Uploading JSON Data
+//Uploading JSON Data Using POST
 async function postJSON(data) {
     try{
-        const response = await fetch("https://example.com/profile", {
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -48,6 +17,7 @@ async function postJSON(data) {
             body: JSON.stringify(data),
         })
         const result = await response.json();
+        console.log(a)
         console.log("Operation completed successfully", result);
     }
     catch (error) {
@@ -57,10 +27,10 @@ async function postJSON(data) {
 const data = { username: "ra_shar" }
 postJSON(data);
 
-//Uploading a File
+//Updating a File using PUT
 async function upload(form) {
     try {
-        const responses = await fetch("https://example.com/profile/avatar", {
+        const responses = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
             method: "PUT",
             body: form,
         });
@@ -71,16 +41,20 @@ async function upload(form) {
         console.log("Operation Failed", error);
     }
 }
-const form = new FormData();
-const file = document.querySelector('input[type="file"]');
-form.append("rashar","summa123");
-form.append("avatar", file.files[0]);
-upload(form);
+function uploadFormData() {
+    const form = new FormData();
+    const file = document.getElementById('fileInput');
+    form.append("rashar","summa123");
+    form.append("avatar", file.files[100]);
+    upload(form);
+    console.log(a)
+}
 
-//Uploading Multiple Files
+
+//Uploading Multiple Files using POST
 async function multiple(formData) {
     try {
-        const resp = await fetch("https://example.com/posts", {
+        const resp = await fetch("https://jsonplaceholder.typicode.com/posts", {
             method: "POST",
             body: formData,
         });
@@ -91,10 +65,73 @@ async function multiple(formData) {
         console.log("Failed!", error);
     }
 }
-const photos = document.querySelector('input[type="file][multiple]');
-const formData = new FormData();
-form.append("title", "Goa trip");
-for (const [i, photos] of Array.from(photos.files).entries()) {
-    formData.append(`photos_${i}`, photo);
+function uploadMulFiles(){
+    const photos = document.getElementById('mulFileInput');
+    const formData = new FormData();
+    formData.append("title", "Goa trip");
+    for (const [i, photo] of Array.from(photos.files).entries()) {
+        formData.append(`photos_${i}`, photo);
+    }
+    multiple(formData);
+    console.log(a)
 }
-multiple(formData);
+
+//Fetching Data from API using GET
+async function getData() {
+    try {
+        const respon = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+        if(!respon.ok) {
+            throw new Error(`HTTP error! Status: ${respon.status}`);
+        }
+        const data = await respon.json();
+        console.log(a)
+        console.log("Data is:\n", data);
+    }
+    catch (error) {
+        console.log("Error, error!", error);
+    }
+    
+}
+
+//Updating A File Using PATCH
+async function updateData() {
+    try {
+        const updated = {
+            title: "Updated Title",
+            body: "Updated Body",
+        } 
+        const respn = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+            method: "PATCH",
+            headers: {
+                'Content-Type':'application/json',
+            },
+            body: JSON.stringify(updated),
+        })
+        if(!respn.ok) {
+            throw new Error(`HTTP ERROR! Status ${respn.status}`);
+        }
+        const data = await respn.json();
+        console.log(a)
+        console.log("Updated Data is:\n", data);
+    }
+    catch (error) {
+        console.log("Error:", error);
+    }
+}
+
+//Deleting using DELETE
+async function deleteData() {
+    try {
+        const answer = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+            method: "DELETE",
+        })
+        if(!answer.ok) {
+            throw new Error(`HTTP Error found! ${answer.status}`);
+        }
+        console.log(a)
+        console.log("Data Successfully Deleted!");
+    }
+    catch(error) {
+        console.log("Error found!", error);
+    }
+}

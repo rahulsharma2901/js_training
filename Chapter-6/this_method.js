@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 //Basic code for understanding
@@ -9,19 +16,19 @@ const person = {
         return this;
     }
 }
-console.log("This is an object method", person.getThis());
-console.log(a);
+displayOutput("This is an object method: " + JSON.stringify(person.getThis()));
+displayOutput(a);
 
 //To calculate the full name
 const man = {
-    fName: "Shreya",
-    lName: "Jangid",
+    fName: "Rahul",
+    lName: "Sharma",
     getFullName: function(){
         return this.fName + ' ' + this.lName;
     }
 }
-console.log("The full name is:", man.getFullName());
-console.log(a);
+displayOutput("The full name is: " + JSON.stringify(man.getFullName()));
+displayOutput(a);
 
 //Counter
 const counter = {
@@ -31,12 +38,12 @@ const counter = {
         return this.count;
     }
 }
-console.log("Count:", counter.increment());
-console.log("Count:", counter.increment());
-console.log("Count:", counter.increment());
-console.log("Count:", counter.increment());
-console.log("Count:", counter.increment());
-console.log(a);
+displayOutput("Count: " + counter.increment());
+displayOutput("Count: " + counter.increment());
+displayOutput("Count: " + counter.increment());
+displayOutput("Count: " + counter.increment());
+displayOutput("Count: " + counter.increment());
+displayOutput(a);
 
 //Toggle
 const toggleButton = {
@@ -46,7 +53,7 @@ const toggleButton = {
         return this.isToggle;
     }
 }
-console.log("Is Toggled:", toggleButton.toggle());
-console.log("Is Toggled:", toggleButton.toggle());
-console.log("Is Toggled:", toggleButton.toggle());
-console.log(a);
+displayOutput("Is Toggled: " + toggleButton.toggle());
+displayOutput("Is Toggled: " + toggleButton.toggle());
+displayOutput("Is Toggled: " + toggleButton.toggle());
+displayOutput(a);

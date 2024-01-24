@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 //click
 const button1 = document.getElementById('button1');
 button1.addEventListener('click', function() {

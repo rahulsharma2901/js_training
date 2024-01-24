@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 //Declaration
@@ -16,8 +23,8 @@ const rect = new Rectangle(
     height = parseInt(prompt("The height is:")),
     width = parseInt(prompt("The width is:")),
 );
-console.log(`Area of the rectangle is: ${height} * ${width} =`, rect.calculateArea());
-console.log(a);
+displayOutput(`Area of the rectangle is: ${height} * ${width} =` + JSON.stringify(rect.calculateArea()));
+displayOutput(a);
 
 //Expression with Anonymous Class
 const rectangle = class {
@@ -35,8 +42,8 @@ const rectAngle = new rectangle(
     h = parseInt(prompt("The height is:")),
     w = parseInt(prompt("The width is:")),
 );
-console.log(`Perimeter of the second rectangle is: 2 * (${h} + ${w}) =`, rectAngle.calcualtePer());
-console.log(a);
+displayOutput(`Perimeter of the second rectangle is: 2 * (${h} + ${w}) =` + JSON.stringify(rectAngle.calcualtePer()));
+displayOutput(a);
 
 //Expression with Class Name
 const Rect = class Rectangle2 {
@@ -54,8 +61,8 @@ const newRect = new Rect(
     length = parseInt(prompt("The length is:")),
     breadth = parseInt(prompt("The breadth is:")),
 )
-console.log(`Area of the new rectangle is: ${length} * ${breadth} =`, newRect.calculateNewArea());
-console.log(a);
+displayOutput(`Area of the new rectangle is: ${length} * ${breadth} =` + JSON.stringify(newRect.calculateNewArea()));
+displayOutput(a);
 
 //Regular Function Method
 class Regular {
@@ -63,12 +70,12 @@ class Regular {
         this.data = [1,2,3,4,5];
     }
     regularFunc() {
-        console.log("Regular Function Method:", this.data);
+        displayOutput("Regular Function Method:" + JSON.stringify(this.data));
     }
 }
 const regular = new Regular();
 regular.regularFunc();
-console.log(a);
+displayOutput(a);
 
 //Generator Function Method
 class Gen {
@@ -83,8 +90,8 @@ class Gen {
 }
 const instance = new Gen();
 const gen = instance.gen();
-console.log("Generator Function Method:", Array.from(gen));
-console.log(a);
+displayOutput("Generator Function Method:" + JSON.stringify(Array.from(gen)));
+displayOutput(a);
 
 //Static Fields and Methods
 class Calculator {
@@ -96,12 +103,12 @@ class Calculator {
         return x * y;
     }
 }
-console.log("Calculator Version is:", Calculator.version);
+displayOutput("Calculator Version is:" + JSON.stringify(Calculator.version));
 const sum = Calculator.add(5,3);
-console.log("The sum of 5 and 3 is:", sum);
+displayOutput("The sum of 5 and 3 is:" + JSON.stringify(sum));
 const product = Calculator.multiply(8,5);
-console.log("The product of 8 and 5 is:", product);
-console.log(a);
+displayOutput("The product of 8 and 5 is:" + JSON.stringify(product));
+displayOutput(a);
 
 //Inheritance
 class Animal {
@@ -109,7 +116,7 @@ class Animal {
         this.name = name;
     }
     speak() {
-        console.log(`${this.name} makes a certain noise!`);
+        displayOutput(JSON.stringify(`${this.name} makes a certain noise!`));
     }
 }
 class Dog extends Animal {
@@ -117,14 +124,14 @@ class Dog extends Animal {
         super(name);
     }
     speak() {
-        console.log(`${this.name} barks!`);
+        displayOutput(JSON.stringify(`${this.name} barks!`));
     }
 }
 const dog = new Dog("Casper");
 dog.speak();
 const animal = new Animal("Frog")
 animal.speak();
-console.log(a)
+displayOutput(a)
 
 //Private Class
 class Counter {
@@ -145,12 +152,12 @@ class Counter {
     }
 }
 const counter = new Counter();
-console.log(counter.getCount());
+displayOutput(JSON.stringify(counter.getCount()));
 counter.increment();
-console.log(counter.getCount());
+displayOutput(JSON.stringify(counter.getCount()));
 counter.increment();
-console.log(counter.getCount());
-console.log(a);
+displayOutput(JSON.stringify(counter.getCount()));
+displayOutput(a);
 
 //Async Function Method
 class Async {
@@ -158,10 +165,10 @@ class Async {
         this.data = [1,2,3,4,5];
     }
     async Async() {
-        console.log("Start the async function!");
+        displayOutput("Start the async function!");
         await new Promise(resolve => setTimeout(resolve, 2000));
-        console.log("Async Function Method Completed!");
-        console.log(a);
+        displayOutput("Async Function Method Completed!");
+        displayOutput(a);
     }
 }
 (async() => {
@@ -187,6 +194,6 @@ class AsyncGen {
     const asyncGen = example.asyncGenerator();
     for await (const element of asyncGen){
         
-        console.log("Async Generator Function Method Completed!", element);
+        displayOutput("Async Generator Function Method Completed!", element);
     }
 })();

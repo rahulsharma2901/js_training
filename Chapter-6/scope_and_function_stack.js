@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 //Simple Loop
@@ -5,11 +12,11 @@ function loop(x){
     if(x >= 10){
         return;
     }
-    console.log(x);
+    displayOutput(x);
     loop(x + 1);
 }
 loop(0);
-console.log(a);
+displayOutput(a);
 
 //Recursion function
 function factorial(n){
@@ -22,20 +29,20 @@ function factorial(n){
 }
 let n = parseInt(prompt("The value of n is:"));
 const result = factorial(n);
-console.log(`The factorial value of ${n} is:`,result);
-console.log(a);
+displayOutput(`The factorial value of ${n} is:` + result);
+displayOutput(a);
 
 //Function Stack
 function foo(i){
     if(i < 0){
         return;
     }
-    console.log(`Begin: ${i}`);
+    displayOutput(`Begin: ${i}`);
     foo(i - 1);
-    console.log(`End: ${i}`);
+    displayOutput(`End: ${i}`);
 }
 foo(5);
-console.log(a);
+displayOutput(a);
 
 //Nested Function
 function squares(p,q){
@@ -44,10 +51,10 @@ function squares(p,q){
     }
     return square(p) + square(q);
 }
-console.log("The sum of the squares of 2 and 3 is:",squares(2,3));
-console.log("The sum of the squares of 4 and 6 is:",squares(4,6));
-console.log("The sum of the squares of 2 and 2 is:",squares(2,2));
-console.log(a);
+displayOutput("The sum of the squares of 2 and 3 is:" + squares(2,3));
+displayOutput("The sum of the squares of 4 and 6 is:" + squares(4,6));
+displayOutput("The sum of the squares of 2 and 2 is:" + squares(2,2));
+displayOutput(a);
 
 //Closure Example
 function outside (m){
@@ -57,19 +64,19 @@ function outside (m){
     return inside;
 }
 const fInside = outside(12);
-console.log(fInside(6));
-console.log(outside(12)(6));
-console.log(a);
+displayOutput(fInside(6));
+displayOutput(outside(12)(6));
+displayOutput(a);
 
 //Scope Chaining
 function A(t){
     function B(u){
         function C(v){
-            console.log(`The sum of ${t}, ${u}, ${v} is:`,t + u + v);
+            displayOutput(`The sum of ${t}, ${u}, ${v} is:` + JSON.stringify(t + u + v));
         }C(6);
     }B(5);
 }A(8);
-console.log(a);
+displayOutput(a);
 
 //Name Conflicting
 function outs(){
@@ -79,4 +86,4 @@ function outs(){
     }
     return ins;
 }
-console.log(`The product is:`,outs()(10));
+displayOutput(`The product is:` + outs()(10));

@@ -3,14 +3,14 @@ x = "\n";
 let a = 12;
 let b = 13;
 let c = 15;
-console.log(a < b && b < c);
-console.log(x);
+displayOutput(a < b && b < c);
+displayOutput(x);
 
 let p = 17;
 let q = 12;
 let r = 13;
-console.log(p > q || q > r);
-console.log(x);
+displayOutput(p > q || q > r);
+displayOutput(x);
 
 let l = true;
-console.log(!l);
+displayOutput(!l);

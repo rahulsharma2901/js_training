@@ -5,15 +5,15 @@ let person = {
     "age": "22",
     "city": "Jaipur"
 }
-console.log(person);
-console.log(a);
+displayOutput(person);
+displayOutput(a);
 
-console.log(person.name)
-console.log(a);
+displayOutput(person.name)
+displayOutput(a);
 
 person.age = 24;
-console.log("age: "+person.age);
-console.log(a);
+displayOutput("age: "+person.age);
+displayOutput(a);
 
 let employee = {
     "name": "Rahul Sharma",
@@ -22,8 +22,8 @@ let employee = {
         "department": "Engineering"
     }
 }
-console.log(employee);
-console.log(a);
+displayOutput(employee);
+displayOutput(a);
 
 let employees = [
     {"name": "Rahul", "age": 22, "position": "CTO"},
@@ -31,26 +31,26 @@ let employees = [
     {"name": "Shreya", "age": 22, "position": "CDO"},
     {"name": "Neha", "age": 22, "position": "CEO"}
 ]
-console.log(employees);
-console.log(a);
+displayOutput(employees);
+displayOutput(a);
 
 let jsonString = '{"name": "Priyal", "age": "22", "position": "COO"}'
 let parsedString =  JSON.parse(jsonString);
-console.log(employees, parsedString);
-console.log(a);
+displayOutput(employees, parsedString);
+displayOutput(a);
 
 let car = {name: "Ford", model: "Mustang"};
 let carString = JSON.stringify(car);
-console.log(carString);
-console.log(a);
+displayOutput(carString);
+displayOutput(a);
 
 for(let key in person){
-    console.log(`${key}: ${person[key]}`)
+    displayOutput(`${key}: ${person[key]}`)
 };
 
 let propertyName = "name";
-console.log(employee[propertyName])
-console.log(a);
+displayOutput(employee[propertyName])
+displayOutput(a);
 
 try {
     let invalidJSON = '{"name": "Mark Ronson", "age":}';
@@ -58,7 +58,7 @@ try {
     if (parsedInvalid.age === undefined){
         throw new Error('Missing the value for "age" property');
     }
-    console.log("Successfully parsed JSON:", parsedInvalid);
+    displayOutput("Successfully parsed JSON:", parsedInvalid);
 }
 catch (error) {
     console.error("Error occuring still while parsing JSON:", error.message);

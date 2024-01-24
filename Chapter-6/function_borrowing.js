@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 //Borrowing a method from one object to another in a constructor function
@@ -11,8 +18,8 @@ const person1 = new Person("Rahul!");
 const person2 = new Person("Shreya!");
 const greeting1 = person1.greet.call(person2);
 const greeting2 = person2.greet.call(person1);
-console.log(greeting1 + "   " + greeting2);
-console.log(a);
+displayOutput(greeting1 + "   " + greeting2);
+displayOutput(a);
 
 //Borrowing a method from a prototype in an inheritance scenario
 function Animal(species) {
@@ -34,8 +41,8 @@ Dog.prototype = Object.create(Animal.prototype);
 Dog.prototype.constructor = Dog;
 const myDog = new Dog("Labrador");
 const dogSpecies = myDog.getSpecies();
-console.log(dogSpecies);
-console.log(a);
+displayOutput(dogSpecies);
+displayOutput(a);
 
 //Borrowing an object to manipulate the other
 const calculator1 = {
@@ -48,8 +55,8 @@ const calculator2 = {
     value: 10,
 };
 calculator1.add.call(calculator2, 4);
-console.log("The sum of 10 and 4 is:",calculator2.value);
-console.log(a);
+displayOutput("The sum of 10 and 4 is:",calculator2.value);
+displayOutput(a);
 
 //Borrowing a method to use with different data structures
 const arr = {
@@ -72,9 +79,9 @@ const queue = {
 }
 arr.push.call(queue, 1);
 arr.push.call(queue, 2);
-console.log("The first element should be:",queue.dequeue());
-console.log("The second element should be:",queue.dequeue());
-console.log(a);
+displayOutput("The first element should be:",queue.dequeue());
+displayOutput("The second element should be:",queue.dequeue());
+displayOutput(a);
 
 //Borrowing a method to apply to multiple similar objects
 function Product(name, price) {
@@ -89,5 +96,5 @@ const phone = new Product("'Smartphone'", 20000);
 
 const phoneInfo = laptop.displayInfo.call(phone);
 const laptopInfo = phone.displayInfo.call(laptop);
-console.log(phoneInfo);
-console.log(laptopInfo);
+displayOutput(phoneInfo);
+displayOutput(laptopInfo);

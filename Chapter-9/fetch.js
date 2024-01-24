@@ -1,10 +1,17 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 //Basic Fetch
 fetch('https://jsonplaceholder.typicode.com/todos/1')
     .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.log("Error!", error));
+    .then(data => displayOutput(JSON.stringify(data)))
+    .catch(error => displayOutput("Error!" + JSON.stringify(error)));
 
 //Uploading JSON Data Using POST
 async function postJSON(data) {
@@ -17,11 +24,11 @@ async function postJSON(data) {
             body: JSON.stringify(data),
         })
         const result = await response.json();
-        console.log(a)
-        console.log("Operation completed successfully", result);
+        displayOutput(a)
+        displayOutput("Operation completed successfully" + JSON.stringify(result));
     }
     catch (error) {
-        console.log("Operation Failed!", error);
+        displayOutput("Operation Failed!" + JSON.stringify(error));
     }
 }
 const data = { username: "ra_shar" }
@@ -35,10 +42,10 @@ async function upload(form) {
             body: form,
         });
         const result = await responses.json();
-        console.log("Operation Successful!", result);
+        displayOutput("Operation Successful!" + JSON.stringify(result));
     }
     catch (error) {
-        console.log("Operation Failed", error);
+        displayOutput("Operation Failed" + JSON.stringify(error));
     }
 }
 function uploadFormData() {
@@ -47,7 +54,7 @@ function uploadFormData() {
     form.append("rashar","summa123");
     form.append("avatar", file.files[100]);
     upload(form);
-    console.log(a)
+    displayOutput(a)
 }
 
 
@@ -59,10 +66,10 @@ async function multiple(formData) {
             body: formData,
         });
         const res = await resp.json();
-        console.log("Success!", res);
+        displayOutput("Success!" + JSON.stringify(res));
     }
     catch(error) {
-        console.log("Failed!", error);
+        displayOutput("Failed!" + JSON.stringify(error));
     }
 }
 function uploadMulFiles(){
@@ -73,7 +80,7 @@ function uploadMulFiles(){
         formData.append(`photos_${i}`, photo);
     }
     multiple(formData);
-    console.log(a)
+    displayOutput(a)
 }
 
 //Fetching Data from API using GET
@@ -84,11 +91,11 @@ async function getData() {
             throw new Error(`HTTP error! Status: ${respon.status}`);
         }
         const data = await respon.json();
-        console.log(a)
-        console.log("Data is:\n", data);
+        displayOutput(a)
+        displayOutput("Data is:\n" + JSON.stringify(data));
     }
     catch (error) {
-        console.log("Error, error!", error);
+        displayOutput("Error, error!" + JSON.stringify(error));
     }
     
 }
@@ -111,11 +118,11 @@ async function updateData() {
             throw new Error(`HTTP ERROR! Status ${respn.status}`);
         }
         const data = await respn.json();
-        console.log(a)
-        console.log("Updated Data is:\n", data);
+        displayOutput(a)
+        displayOutput("Updated Data is:\n" + JSON.stringify(data));
     }
     catch (error) {
-        console.log("Error:", error);
+        displayOutput("Error:" + JSON.stringify(error));
     }
 }
 
@@ -128,10 +135,10 @@ async function deleteData() {
         if(!answer.ok) {
             throw new Error(`HTTP Error found! ${answer.status}`);
         }
-        console.log(a)
-        console.log("Data Successfully Deleted!");
+        displayOutput(a)
+        displayOutput("Data Successfully Deleted!");
     }
     catch(error) {
-        console.log("Error found!", error);
+        displayOutput("Error found!" + JSON.stringify(error));
     }
 }

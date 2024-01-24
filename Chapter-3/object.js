@@ -17,13 +17,13 @@ let calculator = {
 };
 
 let resultAddition = calculator.add(a,b);
-console.log(`Sum is: ${a} + ${b} =`, resultAddition);
+displayOutput(`Sum is: ${a} + ${b} =`, resultAddition);
 
 let resultMultiplication = calculator.multiplication(a,b);
-console.log(`Product is: ${a} * ${b} =`, resultMultiplication);
+displayOutput(`Product is: ${a} * ${b} =`, resultMultiplication);
 
 let resultSubtraction = calculator.subtraction(a,b);
-console.log(`Difference is: ${a} - ${b} =`, resultSubtraction);
+displayOutput(`Difference is: ${a} - ${b} =`, resultSubtraction);
 
 let resultDivision = calculator.division(a,b);
-console.log(`Solution is: ${a} / ${b} =`, resultDivision);
+displayOutput(`Solution is: ${a} / ${b} =`, resultDivision);

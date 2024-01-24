@@ -1,20 +1,27 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n"
 
 //Basic Interval
-console.log("Start");
+displayOutput("Start");
 const interval = setInterval(() => {
-    console.log("Set the output interval for every 1 second",);
+    displayOutput("Set the output interval for every 1 second",);
 }, 1000);
 setTimeout(() => clearInterval(interval), 5000);
 
 //Updating Live Clock
 function update() {
     const now = new Date();
-    console.log(`Current time: ${now.toLocaleDateString()}`);
+    displayOutput(`Current time: ${now.toLocaleDateString()}`);
 }
 setTimeout(() => {
-    console.log(a);
-    console.log("Start");
+    displayOutput(a);
+    displayOutput("Start");
     const clock = setInterval(update, 2000);
     setTimeout(() => clearInterval(clock), 10000)
 }, 5500);
@@ -22,11 +29,11 @@ setTimeout(() => {
 //Counting Seconds
 setTimeout(() => {
     let seconds = 0;
-    console.log(a);
-    console.log("Start")
+    displayOutput(a);
+    displayOutput("Start")
     const seconded = setInterval(() => {
         seconds++;
-        console.log(`Time elapsed: ${seconds}`);
+        displayOutput(`Time elapsed: ${seconds}`);
     }, 1000);
     setTimeout(() => clearInterval(seconded), 5000)
 }, 16500)
@@ -35,10 +42,10 @@ setTimeout(() => {
 setTimeout(() => {
     const msg = ["Hello", "Welcome", "How are you today?", "Goodbye"];
     let current = 0;
-    console.log(a);
-    console.log("Start");
+    displayOutput(a);
+    displayOutput("Start");
     const message = setInterval(() => {
-        console.log(msg[current]);
+        displayOutput(JSON.stringify(msg[current]));
         current++;
         if (current === msg.length) {
             current = 0;

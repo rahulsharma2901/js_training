@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n"
 
 //Implicit binding
@@ -8,38 +15,38 @@ const man = {
         return `Hello, I am ${this.firstName} and I am ${this.years} years old`;
     }
 }
-console.log(man.greet());
-console.log(a);
+displayOutput(JSON.stringify(man.greet()));
+displayOutput(a);
 
 //Call binding
 const person1 = {
     name: "Rahul",
     introduce: function(age) {
-        console.log(`Hi, I'm ${this.name} and I'm ${age} years old.`);
+        displayOutput(`Hi, I'm ${this.name} and I'm ${age} years old.`);
     }
 }
 const person2 = {
     name: "Priyal",
 }
 person1.introduce.call(person2, 21);
-console.log(a);
+displayOutput(a);
 
 //Apply binding
 function displayInfo(greeting, farewell) {
-    console.log(`${greeting}, ${this.naming}!`);
-    console.log(`${farewell}, ${this.naming}!`);
+    displayOutput(`${greeting}, ${this.naming}!`);
+    displayOutput(`${farewell}, ${this.naming}!`);
 }
 const person = {
     naming: "Sneha",
 }
 const greetings = ["Welcome", "Goodbye"];
 displayInfo.apply(person, greetings)
-console.log(a);
+displayOutput(a);
 
 //Bind binding
 function calculateTotal(price, tax) {
     const total = price + (price * tax);
-    console.log((`Total cost of the laptop in ${this.currency} is: ${total}`));
+    displayOutput((`Total cost of the laptop in ${this.currency} is: ${total}`));
 }
 const  product = {
     tech: "Laptop",

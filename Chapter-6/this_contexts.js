@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 x = "\n";
 
 //Function Context
@@ -6,16 +13,16 @@ var a = "Global";
 function whatsThis(){
     return this.a;
 }
-console.log(whatsThis());
+displayOutput(whatsThis());
 obj.whatsThis = whatsThis;
-console.log(obj.whatsThis());
-console.log(x)
+displayOutput(obj.whatsThis());
+displayOutput(x)
 
 //Global Context
 let b = this;
 this.msg = "Welcome to my world, Raman";
-console.log(window.msg);
-console.log(x);
+displayOutput(window.msg);
+displayOutput(x);
 
 //Class Context
 class C {
@@ -23,30 +30,30 @@ class C {
     static staticField = this;
 }
 const c = new C();
-console.log(c.instanceField === c);
-console.log(C.staticField === C);
-console.log(x);
+displayOutput(c.instanceField === c);
+displayOutput(C.staticField === C);
+displayOutput(x);
 
 //Inside Constructor Function
 function Person(){
     this.name = "Shreya";
-    console.log(this);
+    displayOutput(this);
 }
 let person1 = new Person();
-console.log(person1.name);
-console.log(x);
+displayOutput(person1.name);
+displayOutput(x);
 
 //Inside Object Method
 const person = {
     name: "Priyanshi",
     age: 22,
     greet(){
-            console.log(this);
-            console.log("Hello and Welcome" + ", " + this.name);
+            displayOutput(JSON.stringify(this));
+            displayOutput("Hello and Welcome" + ", " + this.name);
     }
 }
 person.greet();
-console.log(x);
+
 
 //Inside Inner Function
 const person2 = {
@@ -54,35 +61,35 @@ const person2 = {
     age: 21,
 
     meet(){
-        console.log(this);
-        console.log(this.age);
+        displayOutput(JSON.stringify(this));
+        displayOutput("Uday's age is: " + this.age);
 
         function innerFunc(){
-            console.log(this);
-            console.log(this.name1);
+            displayOutput(this);
+            displayOutput(JSON.stringify(this.name1));
         }
         innerFunc();
     }
 }
 person2.meet();
-console.log(x);
+displayOutput(x);
 
 //Inside Arrow Function
 const dude = {
     name: "Neha",
     age: 22,
     sayHi() {
-        let hi = () => console.log(this.name + " (" + this.age + ")");
+        let hi = () => displayOutput(this.name + " (" + this.age + ")");
         hi();
     }
 }
 dude.sayHi();   //This proves that this refers to parent scope object in the Arrow Function
-console.log(x);
+displayOutput(x);
 
 //Strict Mode
 'use Strict';
 this.man = "Jayesh";
 function message() {
-    console.log(this.man);
+    displayOutput("The name of the person is: " + this.man);
 }
 message.call(this);

@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 //Callback
@@ -11,8 +18,8 @@ const add = (array) => {
     for (let i of array) {
         sum += i;
     }
-    console.log("The sum of array elements is:", sum);
-    console.log(a);
+    displayOutput("The sum of array elements is:" + JSON.stringify(sum));
+    displayOutput(a);
 }
 main(add);
 
@@ -45,9 +52,9 @@ function getPosts(user, callback) {
     }, 1000)
 }
 function dsiplayData(user, profile, posts, callback) {
-    console.log("User:", user);
-    console.log("Profile:", profile);
-    console.log("Posts:", posts);
+    displayOutput("User:" + JSON.stringify(user));
+    displayOutput("Profile:" + JSON.stringify(profile));
+    displayOutput("Posts:" + JSON.stringify(posts));
     callback();
-    console.log(a);
+    displayOutput(a);
 }

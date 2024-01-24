@@ -3,4 +3,4 @@ class Circle {
         this.area = 3.14*radius*radius;
     }
 }
-console.log(new Circle(5).area);
+displayOutput(new Circle(5).area);

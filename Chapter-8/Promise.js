@@ -1,10 +1,17 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n"
 
 //Basic Promise
 function basic() {
     return new Promise((resolve, rejected) => {
         setTimeout(() => {
-            console.log(a);
+            displayOutput(a);
             resolve("Operation Successful!");
             rejected("Operation Failed!");
         }, 3000);
@@ -12,18 +19,18 @@ function basic() {
 }
 basic()
     .then ((message) => {
-        console.log(message);
+        displayOutput(JSON.stringify(message));
     })
     .catch ((error) => {
-        console.log(error);
+        displayOutput(JSON.stringify(error));
     });
 
 //Chaining Promises
 function one() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log(a);
-            console.log("Step one executed!");
+            displayOutput(a);
+            displayOutput("Step one executed!");
             resolve("Step 1 Data");
             /* reject("Step 1 failed"); */
         }, 5000);
@@ -32,7 +39,7 @@ function one() {
 function two(data) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log("Step two executed!", data);
+            displayOutput("Step two executed!" + JSON.stringify(data));
             resolve("Step 2 Result");
             reject("Step 2 failed");
         }, 2000);
@@ -41,34 +48,34 @@ function two(data) {
 one()
     .then((data) => two(data))
     .then(result => {
-        console.log("Final Result:", result);
+        displayOutput("Final Result:" + JSON.stringify(result));
     })
     .catch(error => {
-        console.log("Error:", error);
+        displayOutput("Error:" + JSON.stringify(error));
     })
 
 //Promise with setTimeout()
 function delay(ms) {
     return new Promise((resolve) => {
         setTimeout(() => {
-            console.log(a);
+            displayOutput(a);
             resolve(`Operation delayed for ${ms} milliseconds`);
         }, ms);
     })
 }
 delay(9000)
     .then(msg => {
-        console.log(msg);
+        displayOutput(JSON.stringify(msg));
     })
     .catch(error => {
-        console.log(error);
+        displayOutput(JSON.stringify(error));
     })
 
 //Conditional Resolving
 function check(number) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            console.log(a);
+            displayOutput(a);
             if(typeof number === 'number') {
                 resolve(`${number} is a valid number!`);
             }
@@ -80,17 +87,17 @@ function check(number) {
 }
 check("Rahul")
     .then(m => {
-        console.log(m);
+        displayOutput(JSON.stringify(m));
     })
     .catch(error => {
-        console.log(error);
+        displayOutput(JSON.stringify(error));
     })
 
 //Display multiple data together
 function multiple() {
     return new Promise((resolve) => {
         setTimeout(() => {
-            console.log(a);
+            displayOutput(a);
             const prom1 = ("Hi my name is Rahul Sharma!");
             const prom2 = ("I am 22 years old!");
             const prom3 = ("I am a React Developer!");
@@ -101,10 +108,10 @@ function multiple() {
 }
 multiple() 
     .then(mes => {
-        console.log("Data from all promises is:\n", mes);
+        displayOutput("Data from all promises is:\n" + JSON.stringify(mes));
     })
     .catch(error => {
-        console.log("Unable to fetch data!",error);
+        displayOutput("Unable to fetch data!" + JSON.stringify(error));
     })
 
 //Promise.all
@@ -116,10 +123,10 @@ function all() {
 }
 all()
     .then(msgs => {
-        console.log(msgs);
+        displayOutput(JSON.stringify(msgs));
     })
     .catch(error => {
-        console.log(error)
+        displayOutput(JSON.stringify(error))
     })
 
 function race() {
@@ -130,8 +137,8 @@ function race() {
 }
 race()
     .then(result => {
-        console.log("First promise to be executed is:\n",result);
+        displayOutput("First promise to be executed is:\n" + JSON.stringify(result));
     })
     .catch(error => {
-        console.log(error);
+        displayOutput(JSON.stringify(error));
     })

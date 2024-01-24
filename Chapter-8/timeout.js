@@ -1,32 +1,39 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 //Basic setTimeout()
-console.log("Start");
+displayOutput("Start");
 setTimeout(() => {
-    console.log("Printed the word after 4...3...2...1...Yay!");
-    console.log();
+    displayOutput("Printed the word after 4...3...2...1...Yay!");
+    displayOutput();
 }, 8000);
-/* console.log("End"); */
+/* displayOutput("End"); */
 
 //Cancel Timeout
 function delayed() {
-    console.log("Delayed log after 3 seconds");
+    displayOutput("Delayed log after 3 seconds");
 }
-/* console.log("Start"); */
+/* displayOutput("Start"); */
 const timeoutID = setTimeout(delayed, 11000);
 /* clearTimeout(timeoutID);
-console.log("End"); */
+displayOutput("End"); */
 
 //Passing Arguments
 function greet(name) {
-    console.log(`Hello, ${name}!`);
+    displayOutput(`Hello, ${name}!`);
 }
 const person = "Shubhanshu";
-/* console.log("Start"); */
+/* displayOutput("Start"); */
 setTimeout(greet, 15000, person);
-/* console.log("End"); */
+/* displayOutput("End"); */
 
 //Inside a Loop
 for(let i = 0; i <= 5; i++){
     setTimeout(() => {
-        console.log(`${i}`);
+        displayOutput(`${i}`);
     }, i * 1000);
 }

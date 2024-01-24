@@ -1,65 +1,65 @@
 a = "\n";
 
 let x = 10;
-console.log(x);
-console.log(a);
+displayOutput(x);
+displayOutput(a);
 
 let y = 7;
 y += 4;
-console.log(y);
-console.log(a);
+displayOutput(y);
+displayOutput(a);
 
 let z = 20;
 z -= 4;
-console.log(z);
-console.log(a);
+displayOutput(z);
+displayOutput(a);
 
 let b = 10;
 b *= 2;
-console.log(b);
-console.log(a);
+displayOutput(b);
+displayOutput(a);
 
 let c = 30;
 c /= 3;
-console.log(c);
-console.log(a);
+displayOutput(c);
+displayOutput(a);
 
 let d = 20;
 d %= 3;
-console.log(d);
-console.log(a);
+displayOutput(d);
+displayOutput(a);
 
 let e = 3;
 e **= 3;
-console.log(e);
-console.log(a);
+displayOutput(e);
+displayOutput(a);
 
 let f = 6;
 f <<= 1; //gives the binary answer shifted to the left
-console.log(f);
-console.log(a);
+displayOutput(f);
+displayOutput(a);
 
 let g = 5;
 g >>= 2;        //gives the binary answer shifted to the right
-console.log(g)
-console.log(a)
+displayOutput(g)
+displayOutput(a)
 
 let h = 8;
 h >>>= 1;       //gives the binary answer shifted to the right while removing the sign of the operand
-console.log(h);
-console.log(a);
+displayOutput(h);
+displayOutput(a);
 
 let i = 8;
 i &= 3;
-console.log(i);
-console.log(a);
+displayOutput(i);
+displayOutput(a);
 
 let j = 12;
 j ^= 3;
-console.log(j);
-console.log(a);
+displayOutput(j);
+displayOutput(a);
 
 let k = 10;
 k |= 3;
-console.log(k);
-console.log(a);
+displayOutput(k);
+displayOutput(a);

@@ -1,19 +1,19 @@
 a = "\n"
 
 const weakMap = new WeakMap();
-console.log(weakMap);
-console.log(a);
+displayOutput(weakMap);
+displayOutput(a);
 
 let obj = {};
 weakMap.set(obj, 'Rahul Sharma');
-console.log(weakMap);
-console.log(a);
+displayOutput(weakMap);
+displayOutput(a);
 
-console.log(weakMap.get(obj));
-console.log(a);
+displayOutput(weakMap.get(obj));
+displayOutput(a);
 
-console.log(weakMap.has(obj));
-console.log(a);
+displayOutput(weakMap.has(obj));
+displayOutput(a);
 
-console.log(weakMap.delete(obj));
-console.log(weakMap);
+displayOutput(weakMap.delete(obj));
+displayOutput(weakMap);

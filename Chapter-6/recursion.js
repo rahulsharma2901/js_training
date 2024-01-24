@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 //Factorial
@@ -7,8 +14,8 @@ function factorial(n){
     }
     return n * factorial(n - 1);
 }
-console.log("The factorial result is:",factorial(5));
-console.log(a);
+displayOutput("The factorial result is: " + JSON.stringify(factorial(5)));
+displayOutput(a);
 
 //Fibonacci
 function fibonacci(n){
@@ -16,8 +23,8 @@ function fibonacci(n){
     if ( n === 1) return 1;
     return fibonacci(n - 1) + fibonacci(n - 2);
 }
-console.log("The sum of the fibonacci series is:",fibonacci(8));
-console.log(a);
+displayOutput("The sum of the fibonacci series is: " + JSON.stringify(fibonacci(8)));
+displayOutput(a);
 
 //Array Elements Sum
 function sumArray (arr, index = 0){
@@ -26,8 +33,8 @@ function sumArray (arr, index = 0){
     }
     return arr[index] + sumArray(arr, index + 1);
 }
-console.log("The sum of the array elements is:",sumArray([1,2,3,4,5,6]));
-console.log(a);
+displayOutput("The sum of the array elements is: " + JSON.stringify(sumArray([1,2,3,4,5,6])));
+displayOutput(a);
 
 //Countdown
 function countdown(x){
@@ -35,11 +42,11 @@ function countdown(x){
         return;
     }
     countdown(x + 1);
-    console.log(x);
+    displayOutput(x);
 }
 countdown(0);
-console.log("LIFTOFF!")
-console.log(a);
+displayOutput("LIFTOFF!")
+displayOutput(a);
 
 //Sum of Natural Numbers
 function sumNatural(p){
@@ -50,4 +57,4 @@ function sumNatural(p){
         return p + sumNatural(p - 1);
     }
 }
-console.log("The sum of natural numbers till 8 is:",sumNatural(8));
+displayOutput("The sum of natural numbers till 8 is: " + JSON.stringify(sumNatural(8)));

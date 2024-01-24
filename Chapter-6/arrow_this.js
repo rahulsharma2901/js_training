@@ -1,21 +1,28 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 const obj1 = {
     name: 'Ravikant',
     printName: () => {
-        console.log(this.name);
+        displayOutput(JSON.stringify(this.name));
     }
 };
 obj1.printName();
-console.log(a);
+displayOutput(a);
 
 const obj2 = {
     theName: 'Ravikant',
     printTheName() {
-        console.log(this.theName);
+        displayOutput(JSON.stringify(this.theName));
     },
     printNameWithArrow: () => {
-        console.log(this.name);
+        displayOutput(JSON.stringify(this.name));
     }
 }
 obj2.printTheName();

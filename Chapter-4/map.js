@@ -1,60 +1,60 @@
 a = "\n";
 
 const map1 = new Map();
-console.log(map1);
-console.log(a);
+displayOutput(map1);
+displayOutput(a);
 
 map1.set('employee1', {name: "Jack", age: 26});
 map1.set('employee2', {name: "Jonas", age: 25});
 map1.set('employee3', {name: "Jonah", age: 32});
 map1.set('employee4', {name: "Jon", age: 24});
-console.log(map1);
-console.log(a);
+displayOutput(map1);
+displayOutput(a);
 
-console.log(map1.get('employee1'));
-console.log(a);
+displayOutput(map1.get('employee1'));
+displayOutput(a);
 
-console.log(map1.has("employee3"));
-console.log(a);
+displayOutput(map1.has("employee3"));
+displayOutput(a);
 
-console.log(map1.size);
-console.log(a);
+displayOutput(map1.size);
+displayOutput(a);
 
-console.log(map1);
-console.log("Is there a object called address?");
-console.log(map1.delete('address'));
-console.log(map1.delete('employee4'));
-console.log(map1);
-console.log(a);
+displayOutput(map1);
+displayOutput("Is there a object called address?");
+displayOutput(map1.delete('address'));
+displayOutput(map1.delete('employee4'));
+displayOutput(map1);
+displayOutput(a);
 
 map1.clear();
-console.log(map1);
-console.log(a);
+displayOutput(map1);
+displayOutput(a);
 
 let map2 = new Map();
 map2.set('name', 'Jack');
 map2.set('age', '28');
 for(let [key,value] of map2){
-    console.log(key, ": ", value);
+    displayOutput(key, ": ", value);
 }
-console.log(a);
+displayOutput(a);
 
 map2.forEach(function(value, key){
-    console.log(key + ": " + value);
+    displayOutput(key + ": " + value);
 })
-console.log(a);
+displayOutput(a);
 
 for(let key of map2.keys()){
-    console.log(key);
+    displayOutput(key);
 }
-console.log(a);
+displayOutput(a);
 
 for (let values of map2.values()) {
-    console.log(values);
+    displayOutput(values);
 }
-console.log(a);
+displayOutput(a);
 
 for(let elem of map2.entries()){
-    console.log(`${elem[0]}: ${elem[1]}`)
+    displayOutput(`${elem[0]}: ${elem[1]}`)
 }
-console.log(a);
+displayOutput(a);

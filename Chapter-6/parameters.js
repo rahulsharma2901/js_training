@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 x = "\n";
 
 //Function Parameters
@@ -19,15 +26,15 @@ function num(var1,var2,var3){
         }
     }
 }
-console.log("The largest number among the variables is:",num(23,31,27));
-console.log(x);
+displayOutput("The largest number among the variables is: " + num(23,31,27));
+displayOutput(x);
 
 //Default Parameters
 function n (num1, num2 = 3){
     return num1 * num2;
 }
-console.log("The product of the numbers is:",n(5))
-console.log(x);
+displayOutput("The product of the numbers is: " + n(5))
+displayOutput(x);
 
 //Argument Object
 function counting(){
@@ -40,44 +47,44 @@ function counting(){
     }
     return maxnum;
 }
-console.log("The largest number in the counting is:",counting(10,23,34,453,500,1089,3,89,0));
-console.log(x);
+displayOutput("The largest number in the counting is: " + counting(10,23,34,453,500,1089,3,89,0));
+displayOutput(x);
 
 //Arguments Pass by Value
 function changing(n1,n2){
-    console.log("Inside the changing function:");
+    displayOutput("Inside the changing function:");
 
     n1 = 100;
     n2 = 200;
     
-    console.log("Old number1 = " + n1 + " and Old number2 = "+ n2);
+    displayOutput("Old number1 = " + n1 + " and Old number2 = "+ n2);
 }
 n1 = 20;
 n2 = 10;
 
-console.log("Before calling the function:");
-console.log("New number1 = " + n1 + " and New number2 = " + n2);
+displayOutput("Before calling the function:");
+displayOutput("New number1 = " + n1 + " and New number2 = " + n2);
 
 changing(n1, n2);
 
-console.log("After calling the function:");
-console.log("New number1 = " + n1 + " and New number2 = " + n2);
-console.log(x);
+displayOutput("After calling the function:");
+displayOutput("New number1 = " + n1 + " and New number2 = " + n2);
+displayOutput(x);
 
 //Objects Passed by Reference
 function reference(varObj){
-    console.log("Inside the reference function:");
+    displayOutput("Inside the reference function:");
 
     varObj.a = 100;
-    console.log(varObj.a);
+    displayOutput(JSON.stringify(varObj.a));
 }
 
 varObj = {a: 1};
 
-console.log("Before calling the function:");
-console.log(varObj);
+displayOutput("Before calling the function:");
+displayOutput(JSON.stringify(varObj));
 
 reference(varObj);
 
-console.log("After calling the function:");
-console.log(varObj);
+displayOutput("After calling the function:");
+displayOutput(JSON.stringify(varObj));

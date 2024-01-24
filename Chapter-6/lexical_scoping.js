@@ -1,45 +1,52 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 //Global Scope
-console.log("Global Scope")
+displayOutput("Global Scope")
 var global = "WELCOME TO MY WORLD!"
 function globalSc(){
-    console.log("Accessible inside the function:",global);
+    displayOutput("Accessible inside the function:",global);
 }
 globalSc();
-console.log("Accessible outside the function:",global);
-console.log(a);
+displayOutput("Accessible outside the function:",global);
+displayOutput(a);
 
 //Local Scope
-console.log("Local Scope")
+displayOutput("Local Scope")
 function localSc(){
     var local = "WELCOME TO MY WORLD!";
-    console.log("The local scope is accessible only in the function, like:",local);
+    displayOutput("The local scope is accessible only in the function, like:",local);
 }
 localSc();
-console.log(a);
+displayOutput(a);
 
 //Nested Scope
-console.log("Nested Scope")
+displayOutput("Nested Scope")
 function outerFunction(){
     var outer = "WELCOME TO MY WORLD!";
     function innerFunction(){
         var inner = "WELCOME TO MY WORLD!";
-        console.log("The outer function displays:",outer);
-        console.log("The inner function displays:",inner);
+        displayOutput("The outer function displays:",outer);
+        displayOutput("The inner function displays:",inner);
     }
     innerFunction();
 }
 outerFunction();
-console.log(a);
+displayOutput(a);
 
 //Block Scope
-console.log("Block Scope")
+displayOutput("Block Scope")
 function blocked(){
     let name = "UDAY";
     if (true){
         let message = "WELCOME TO THE WORLD!";
-        console.log(message + " " + name);
+        displayOutput(message + " " + name);
     }
 }
 blocked();

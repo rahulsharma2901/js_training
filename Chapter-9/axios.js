@@ -1,4 +1,4 @@
-/* function displayOutput(output) {
+function displayOutput(output) {
     var out = document.getElementById('output');
     var para = document.createElement('p');
     para.textContent = output;
@@ -90,4 +90,4 @@ axios.delete('https://jsonplaceholder.typicode.com/posts/1')
     })
     .catch(error => {
         displayOutput("ERROR found here!" + JSON.stringify(error))
-    }) */
+    })

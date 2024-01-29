@@ -9,7 +9,7 @@ a = "\n";
 
 //Simple Loop
 function loop(x){
-    if(x >= 10){
+    if(x >= 5){
         return;
     }
     displayOutput(x);
@@ -24,12 +24,12 @@ function factorial(n){
         return 1;
     }
     else{
-        return n * factorial (n - 1);
+        return n * factorial(n - 1);
     }
 }
 let n = parseInt(prompt("The value of n is:"));
 const result = factorial(n);
-displayOutput(`The factorial value of ${n} is:` + result);
+displayOutput(`The factorial value of ${n} is:` + JSON.stringify(result));
 displayOutput(a);
 
 //Function Stack
@@ -86,4 +86,4 @@ function outs(){
     }
     return ins;
 }
-displayOutput(`The product is:` + outs()(10));
+displayOutput(`The product is:` + JSON.stringify(outs()(10)));

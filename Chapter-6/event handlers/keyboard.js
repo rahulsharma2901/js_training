@@ -4,6 +4,7 @@ function displayOutput(myInput1) {
     para.textContent = myInput1;
     out.appendChild(para);
 }
+
 const input1 = document.getElementById('myInput1');
 input1.addEventListener('keydown', function(event) {
     displayOutput(`Key down: ${event.key}`)

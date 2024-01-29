@@ -1,65 +1,72 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 let x = 10;
-displayOutput(x);
+displayOutput(JSON.stringify(x));
 displayOutput(a);
 
 let y = 7;
 y += 4;
-displayOutput(y);
+displayOutput(JSON.stringify(y));
 displayOutput(a);
 
 let z = 20;
 z -= 4;
-displayOutput(z);
+displayOutput(JSON.stringify(z));
 displayOutput(a);
 
 let b = 10;
 b *= 2;
-displayOutput(b);
+displayOutput(JSON.stringify(b));
 displayOutput(a);
 
 let c = 30;
 c /= 3;
-displayOutput(c);
+displayOutput(JSON.stringify(c));
 displayOutput(a);
 
 let d = 20;
 d %= 3;
-displayOutput(d);
+displayOutput(JSON.stringify(d));
 displayOutput(a);
 
 let e = 3;
 e **= 3;
-displayOutput(e);
+displayOutput(JSON.stringify(e));
 displayOutput(a);
 
 let f = 6;
 f <<= 1; //gives the binary answer shifted to the left
-displayOutput(f);
+displayOutput(JSON.stringify(f));
 displayOutput(a);
 
 let g = 5;
 g >>= 2;        //gives the binary answer shifted to the right
-displayOutput(g)
+displayOutput(JSON.stringify(g))
 displayOutput(a)
 
 let h = 8;
 h >>>= 1;       //gives the binary answer shifted to the right while removing the sign of the operand
-displayOutput(h);
+displayOutput(JSON.stringify(h));
 displayOutput(a);
 
 let i = 8;
 i &= 3;
-displayOutput(i);
+displayOutput(JSON.stringify(i));
 displayOutput(a);
 
 let j = 12;
 j ^= 3;
-displayOutput(j);
+displayOutput(JSON.stringify(j));
 displayOutput(a);
 
 let k = 10;
 k |= 3;
-displayOutput(k);
+displayOutput(JSON.stringify(k));
 displayOutput(a);

@@ -8,12 +8,12 @@ function displayOutput(output) {
 a = "\n";
 
 const weakMap = new WeakMap();
-displayOutput(JSON.stringify(weakMap));
+displayOutput("WeakMap without any entries is: " + JSON.stringify(weakMap));
 displayOutput(a);
 
 let obj = {};
 weakMap.set(obj, 'Rahul Sharma');
-displayOutput(JSON.stringify(weakMap));
+displayOutput("Obj: " + weakMap.get(obj))
 displayOutput(a);
 
 displayOutput(weakMap.get(obj));
@@ -23,4 +23,4 @@ displayOutput(weakMap.has(obj));
 displayOutput(a);
 
 displayOutput(weakMap.delete(obj));
-displayOutput(weakMap);
+displayOutput(JSON.stringify(weakMap));

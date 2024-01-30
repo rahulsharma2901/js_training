@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a= "\n";
 
 let person = {
@@ -5,14 +12,14 @@ let person = {
     "age": "22",
     "city": "Jaipur"
 }
-displayOutput(person);
+displayOutput(JSON.stringify(person));
 displayOutput(a);
 
 displayOutput(person.name)
 displayOutput(a);
 
 person.age = 24;
-displayOutput("age: "+person.age);
+displayOutput("age: " + person.age);
 displayOutput(a);
 
 let employee = {
@@ -22,7 +29,7 @@ let employee = {
         "department": "Engineering"
     }
 }
-displayOutput(employee);
+displayOutput(JSON.stringify(employee));
 displayOutput(a);
 
 let employees = [
@@ -31,12 +38,12 @@ let employees = [
     {"name": "Shreya", "age": 22, "position": "CDO"},
     {"name": "Neha", "age": 22, "position": "CEO"}
 ]
-displayOutput(employees);
+displayOutput(JSON.stringify(employees));
 displayOutput(a);
 
 let jsonString = '{"name": "Priyal", "age": "22", "position": "COO"}'
 let parsedString =  JSON.parse(jsonString);
-displayOutput(employees, parsedString);
+displayOutput(JSON.stringify(employees) + JSON.stringify(parsedString));
 displayOutput(a);
 
 let car = {name: "Ford", model: "Mustang"};
@@ -53,13 +60,13 @@ displayOutput(employee[propertyName])
 displayOutput(a);
 
 try {
-    let invalidJSON = '{"name": "Mark Ronson", "age":}';
+    let invalidJSON = '{"name": "Mark Ronson", "age": 25}';
     let parsedInvalid = JSON.parse(invalidJSON);
     if (parsedInvalid.age === undefined){
         throw new Error('Missing the value for "age" property');
     }
-    displayOutput("Successfully parsed JSON:", parsedInvalid);
+    displayOutput("Successfully parsed JSON: " + JSON.stringify(parsedInvalid));
 }
 catch (error) {
-    console.error("Error occuring still while parsing JSON:", error.message);
+    console.error("Error occuring still while parsing JSON:" + error.message);
 }

@@ -1,41 +1,52 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 const map1 = new Map();
-displayOutput(map1);
-displayOutput(a);
+
+displayOutput(JSON.stringify("The empty map is: " + map1));
 
 map1.set('employee1', {name: "Jack", age: 26});
 map1.set('employee2', {name: "Jonas", age: 25});
 map1.set('employee3', {name: "Jonah", age: 32});
 map1.set('employee4', {name: "Jon", age: 24});
-displayOutput(map1);
+displayOutput("Map entries:");
+map1.forEach((value, key) => {
+    displayOutput(`${key}: ${JSON.stringify(value)}`);
+});
+
+displayOutput(JSON.stringify(map1.get('employee1')));
 displayOutput(a);
 
-displayOutput(map1.get('employee1'));
+displayOutput(JSON.stringify("Does map2 have key named as employee3? " + map1.has("employee3")));
 displayOutput(a);
 
-displayOutput(map1.has("employee3"));
+displayOutput("The size of the map is: " + map1.size);
 displayOutput(a);
 
-displayOutput(map1.size);
-displayOutput(a);
-
-displayOutput(map1);
-displayOutput("Is there a object called address?");
+displayOutput("Is there an object called address?");
 displayOutput(map1.delete('address'));
+displayOutput("Is there an object called empoyee4?")
 displayOutput(map1.delete('employee4'));
-displayOutput(map1);
-displayOutput(a);
+map1.forEach((value, key) => {    
+    displayOutput(`${key}: ${JSON.stringify(value)}`);
+    displayOutput(a);
+})
 
 map1.clear();
 displayOutput(map1);
 displayOutput(a);
 
-let map2 = new Map();
-map2.set('name', 'Jack');
-map2.set('age', '28');
-for(let [key,value] of map2){
-    displayOutput(key, ": ", value);
+let map3 = new Map();
+map3.set('name', 'Jack');
+map3.set('age', '28');
+for(let [key,value] of map3){
+    displayOutput(key + ": " + value);
 }
 displayOutput(a);
 

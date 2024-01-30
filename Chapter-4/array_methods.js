@@ -1,3 +1,10 @@
+function displayOutput(output) {
+    var out = document.getElementById('output');
+    var para = document.createElement('p');
+    para.textContent = output;
+    out.appendChild(para);
+}
+
 a = "\n";
 
 let prime = [2,3,5,7];

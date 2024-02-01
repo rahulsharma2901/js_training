@@ -36,7 +36,7 @@ displayOutput(x);
 
 //Inside Constructor Function
 function Person(){
-    this.name = "Shreya";
+    this.name = "Priyal";
     displayOutput(this);
 }
 let person1 = new Person();

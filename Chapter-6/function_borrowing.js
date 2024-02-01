@@ -15,7 +15,7 @@ Person.prototype.greet = function (){
     return `Hello, my name is ${this.name}`;
 }
 const person1 = new Person("Rahul!");
-const person2 = new Person("Shreya!");
+const person2 = new Person("Uday!");
 const greeting1 = person1.greet.call(person2);
 const greeting2 = person2.greet.call(person1);
 displayOutput(greeting1 + "   " + greeting2);

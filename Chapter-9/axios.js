@@ -51,7 +51,7 @@ const headers = {
     'Content-Type' : 'application/json',
     'Authorization' : 'auth-token bearer'
 }
-axios.get('https://jsonplaceholder.typicode.com/posts/4', {headers})
+axios.get('https://jsonplaceholder.typicode.com/posts/1', {headers})
     .then((response) => displayOutput("CUSTOM HEADERS:" + JSON.stringify(response.data)))
     .catch((error) => displayOutput("ERROR!" + JSON.stringify(error)));
 

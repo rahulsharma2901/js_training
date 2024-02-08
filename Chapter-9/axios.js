@@ -52,7 +52,7 @@ const headers = {
     'Authorization' : 'auth-token bearer'
 }
 axios.get('https://jsonplaceholder.typicode.com/posts/1', {headers})
-    .then((response) => displayOutput("CUSTOM HEADERS:" + JSON.stringify(response.data)))
+    .then((response) => displayOutput("CUSTOM HEADERS are:" + JSON.stringify(response.data)))
     .catch((error) => displayOutput("ERROR!" + JSON.stringify(error)));
 
 //Axios API using HEAD

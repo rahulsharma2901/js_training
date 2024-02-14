@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management System</title>
+</head>
+<body>
+    
+    <div id="teamNav">
+        <a href="tasks.html" style="color: maroon; text-decoration: none; font-weight: bolder;">HOME</a>
+        <select name="teamList" id="teams" style="font-weight: bolder; color: maroon;" onchange="window.location.href = this.value">
+            <option value="" selected>TEAMS</option>
+            <option value="Teams/teamA.html">FrontEnd Team</option>
+            <option value="Teams/teamB.html">BackEnd Team</option>
+            <option value="Teams/teamC.html">PHP Team</option>
+        </select>
+        <select name="projectList" id="projects" style="font-weight: bolder; color: maroon;" onchange="window.location.href = this.value">
+            <option value="">PROJECTS</option>
+            <option value="Projects/project1.html">E-Commerce</option>
+            <option value="Projects/project2.html">HealthCare</option>
+            <option value="Projects/project3.html">Advertising</option>
+        </select>
+    
+        <select name="departmentList" id="department" style="color: maroon; font-weight: bolder;" onchange="window.location.href = this.value">
+            <option value="">DEPARTMENTS</option>
+            <option value="Departments/department1.html">Administration</option>
+            <option value="Departments/department2.html">Finance</option>
+            <option value="Departments/department3.html">Marketing</option>
+        </select>
+    
+        <select name="priorityList" id="priority" style="color: maroon; font-weight: bolder;" onchange="window.location.href = this.value">
+            <option value="">PRIORITIES</option>
+            <option value="Priorities/priority1.html">Low Priority</option>
+            <option value="Priorities/priority2.html">Medium Priority</option>
+            <option value="Priorities/priority3.html">High Priority</option>
+        </select>
+    
+        <select name="progressList" id="progress" style="color: maroon; font-weight: bolder;" onchange="window.location.href = this.value">
+            <option value="">PROGRESS</option>
+            <option value="Progress/progress1.html">TO-DO</option>
+            <option value="Progress/progress2.html">In-Progress</option>
+            <option value="Progress/progress3.html">Completed</option>
+        </select>
+    </div>
+
+    <div class="main">
+        <input type="text" id="title" placeholder="Add Title">
+        <input type="text" id="description" placeholder="Add Description">
+        <input type="date" id="dueDate">
+        <select name="priority" id="priorities">
+            <option value="priorityLevel">--Priority Level</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+        </select>
+        <select name="teamName" id="teamSelection">
+            <option value="teams">--Team Name</option>
+            <option value="FrontEnd">FrontEnd Team</option>
+            <option value="Backend">BackEnd Team</option>
+            <option value="PHP">PHP Team</option>
+        </select>
+        <select name="project" id="projectList">
+            <option value="projects">--Project Name</option>
+            <option value="E-Commerce">E-Commerce</option>
+            <option value="HealthCare">HealthCare</option>
+            <option value="Advertising">Advertising</option>
+        </select>
+        <select name="dept" id="departmentsList">
+            <option value="departments">--Department Name</option>
+            <option value="Administration">Administration</option>
+            <option value="Finance">Finance</option>
+            <option value="Marketing">Marketing</option>
+        </select>
+        <select name="prog" id="progressLevelList">
+            <option value="progressLevel">--Progress Level</option>
+            <option value="TO-DO">TO-DO</option>
+            <option value="In-Progress">In-Progress</option>
+            <option value="Completed">Completed</option>
+        </select>
+        <button onclick="createTask()">Add Task</button>
+    </div>
+    <br><hr>
+    <h2>ALL TASKS</h2>
+    <ol id="output"></ol>
+    
+    <script src="tasks.js"></script>
+</body>
+</html>

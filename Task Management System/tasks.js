@@ -88,7 +88,8 @@ function updateTasks(output, tasks) {
         var deleteButton = document.createElement('button');
         deleteButton.textContent = "Delete";
         deleteButton.onclick = function() {
-            listItem.remove();
+            listItem.remove()
+            localStorage.removeItem(task);
         };
 
         listItem.appendChild(boxElement);
@@ -104,10 +105,18 @@ function updateTasks(output, tasks) {
 
         boxElement.appendChild(buttonContainer);
         
-
+        document.getElementById('title').value = '';
+        document.getElementById('description').value = '';
+        document.getElementById('dueDate').value = '';
+        document.getElementById('priorities').value = 'priorityLevel';
+        document.getElementById('teamSelection').value = 'teams';
+        document.getElementById('projectList').value = 'projects';
+        document.getElementById('departmentsList').value = 'departments';
+        document.getElementById('progressLevelList').value = 'progressLevel';
     })
 }
-function createTask() {
+
+function createTask() {         
     var titleInput = document.getElementById('title').value;
     var descriptionInput = document.getElementById('description').value;
     var dueDateInput = document.getElementById('dueDate').value;
@@ -130,6 +139,11 @@ function createTask() {
             department: departmentsList,
             progress: progressLevel
         };
+
+        var listItem = document.createElement('li');
+
+        var boxElement = document.createElement('div');
+        boxElement.classList.add('output-box');
 
 	    var titleElement = document.createElement('h4');
         titleElement.textContent = titleInput;
@@ -166,17 +180,62 @@ function createTask() {
         boxElement.appendChild(progress);
         
         saveTask(task);
+
+        var editButton = document.createElement('button');
+        editButton.textContent = 'EDIT';
+        editButton.onclick = function() {
+            titleElement.contentEditable = true;
+            descriptionElement.contentEditable = true;
+            dueElement.contentEditable = true;
+            priority.contentEditable = true;
+            teams.contentEditable = true;
+            projects.contentEditable = true;
+            departments.contentEditable = true;
+            progress.contentEditable = true;
+        }
+
+        var saveButton = document.createElement('button');
+        saveButton.textContent = 'SAVE';
+        saveButton.onclick = function() {
+            titleElement.contentEditable = false;
+            descriptionElement.contentEditable = false;
+            dueElement.contentEditable = false;
+            priority.contentEditable = false;
+            teams.contentEditable = false;
+            projects.contentEditable = false;
+            departments.contentEditable = false;
+            progress.contentEditable = false;
+        }
+
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = 'DELETE';
+        deleteButton.onclick = function() {
+            listItem.remove();
+        }
+
+        listItem.appendChild(boxElement);
         
         output.appendChild(listItem);
 
+        var buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('box-buttons');
+
+        buttonContainer.appendChild(editButton);
+        buttonContainer.appendChild(saveButton);
+        buttonContainer.appendChild(deleteButton);
+
+        boxElement.appendChild(buttonContainer);
+
+        loadTasks();
+        
         document.getElementById('title').value = '';
         document.getElementById('description').value = '';
         document.getElementById('dueDate').value = '';
-        document.getElementById('priorities').value = '--Add Priority';
-        document.getElementById('teamSelection').value = '--Team Name';
-        document.getElementById('projectList').value = '--Project Name';
-        document.getElementById('departmentsList').value = '--Department Name';
-        document.getElementById('progressLevelList').value = '--Progress Level';
+        document.getElementById('priorities').value = 'priorityLevel';
+        document.getElementById('teamSelection').value = 'teams';
+        document.getElementById('projectList').value = 'projects';
+        document.getElementById('departmentsList').value = 'departments';
+        document.getElementById('progressLevelList').value = 'progressLevel';
         
     }
 }

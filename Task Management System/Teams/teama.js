@@ -1,6 +1,7 @@
 const teamA = [];
 
 function updateTeamATasks(outputList) {
-    tasksTeamA.forEach(task => outputList.appendChild(task))
+    localStorage.getItem('tasks', JSON.stringify(loadTasks), outputList);
+
 };
 console.log("Is Team A running");

@@ -1,43 +1,48 @@
-function createTask() {
-    var titleInput = document.getElementById('title').value;
-    var descriptionInput = document.getElementById('description').value;
-    var dueDate = document.getElementById('dueDate').value;
-    var priorityInput = document.getElementById('priorities').value;
-    var teamSelection = document.getElementById('teamSelection').value;
-    var projectInput = document.getElementById('projectList').value;
-    var departmentsList = document.getElementById('departmentsList').value;
-    var progressLevel = document.getElementById('progressLevelList').value;
-    var output = document.getElementById('output');
+function saveTask(task) {
+    var existingTasks = localStorage.getItem('tasks');
+    var tasks = existingTasks ? JSON.parse(existingTasks) : [];
 
-    if (titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDate.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() !== ''){
+    tasks.push(task);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+function loadTasks() {
+    var existingTasks = localStorage.getItem('tasks');
+    var tasks = existingTasks ? JSON.parse(existingTasks) : [];
+
+    updateTasks(document.getElementById('output'), tasks);
+}
+
+function updateTasks(output, tasks) {
+    output.innerHTML = '';
+    tasks.forEach(task => {
         var listItem = document.createElement('li');
 
         var boxElement = document.createElement('div');
         boxElement.classList.add('output-box');
-        
-        var titleElement = document.createElement('h4');
-        titleElement.textContent = titleInput;
+	
+	    var titleElement = document.createElement('h4');
+        titleElement.textContent = task.title;
 
         var descriptionElement = document.createElement('p');
-        descriptionElement.textContent = descriptionInput;
+        descriptionElement.textContent = task.description;
 
         var dueElement = document.createElement('p');
-        dueElement.textContent = "Due Date: " + dueDate;
+        dueElement.textContent = "Due Date: " + task.dueDate;
 
-        var priority = document.createElement('p')
-        priority.textContent = "Priority Level: " + priorityInput;
+        var priority = document.createElement('p');
+        priority.textContent = "Priority Level: " + task.priority;
 
         var teams = document.createElement('p');
-        teams.textContent = "Team Name: " + teamSelection;
+        teams.textContent = "Team Name: " + task.teams;
 
         var projects = document.createElement('p');
-        projects.textContent = "Project Name: " + projectInput;
+        projects.textContent = "Project Name: " + task.project;
 
         var departments = document.createElement('p');
-        departments.textContent = "Department Name: " + departmentsList;
+        departments.textContent = "Department Name: " + task.department;
 
         var progress = document.createElement('p');
-        progress.textContent = "Progress Level: " + progressLevel;
+        progress.textContent = "Progress Level: " + task.progress;
 
         boxElement.appendChild(titleElement);
         boxElement.appendChild(descriptionElement);
@@ -47,8 +52,6 @@ function createTask() {
         boxElement.appendChild(projects);
         boxElement.appendChild(departments);
         boxElement.appendChild(progress);
-
-        listItem.appendChild(boxElement);
 
         var editButton = document.createElement('button');
         editButton.textContent = "Edit";
@@ -74,9 +77,9 @@ function createTask() {
             dueElement.contentEditable = false;
             priority.contentEditable = false;
             teams.contentEditable = false;
-            projects.contentEditable = true;
-            departments.contentEditable = true;
-            progress.contentEditable = true;
+            projects.contentEditable = false;
+            departments.contentEditable = false;
+            progress.contentEditable = false;
 
             saveButton.style.display = 'none';
             editButton.style.display = 'inline-block'
@@ -88,22 +91,93 @@ function createTask() {
             listItem.remove();
         };
 
+        listItem.appendChild(boxElement);
+        
+        output.appendChild(listItem);
+
         var buttonContainer = document.createElement('div');
         buttonContainer.classList.add('box-buttons');
 
         buttonContainer.appendChild(editButton);
         buttonContainer.appendChild(saveButton);
         buttonContainer.appendChild(deleteButton);
+
         boxElement.appendChild(buttonContainer);
+        
+
+    })
+}
+function createTask() {
+    var titleInput = document.getElementById('title').value;
+    var descriptionInput = document.getElementById('description').value;
+    var dueDateInput = document.getElementById('dueDate').value;
+    var priorityInput = document.getElementById('priorities').value;
+    var teamSelection = document.getElementById('teamSelection').value;
+    var projectInput = document.getElementById('projectList').value;
+    var departmentsList = document.getElementById('departmentsList').value;
+    var progressLevel = document.getElementById('progressLevelList').value;
+    var output = document.getElementById('output');
+
+    if (titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() !== ''){
+
+        var task = {
+            title: titleInput,
+            description: descriptionInput,
+            dueDate: dueDateInput,
+            priority: priorityInput,
+            teams: teamSelection,
+            project: projectInput,
+            department: departmentsList,
+            progress: progressLevel
+        };
+
+	    var titleElement = document.createElement('h4');
+        titleElement.textContent = titleInput;
+
+        var descriptionElement = document.createElement('p');
+        descriptionElement.textContent = descriptionInput;
+
+        var dueElement = document.createElement('p');
+        dueElement.textContent = "Due Date: " + dueDateInput;
+
+        var priority = document.createElement('p')
+        priority.textContent = "Priority Level: " + priorityInput;
+
+        var teams = document.createElement('p');
+        teams.textContent = "Team Name: " + teamSelection;
+
+        var projects = document.createElement('p');
+        projects.textContent = "Project Name: " + projectInput;
+
+        var departments = document.createElement('p');
+        departments.textContent = "Department Name: " + departmentsList;
+
+        var progress = document.createElement('p');
+        progress.textContent = "Progress Level: " + progressLevel;
+
+        
+        boxElement.appendChild(titleElement);
+        boxElement.appendChild(descriptionElement);
+        boxElement.appendChild(dueElement);
+        boxElement.appendChild(priority);
+        boxElement.appendChild(teams);
+        boxElement.appendChild(projects);
+        boxElement.appendChild(departments);
+        boxElement.appendChild(progress);
+        
+        saveTask(task);
+        
         output.appendChild(listItem);
 
         document.getElementById('title').value = '';
         document.getElementById('description').value = '';
-        document.getElementById('dueInput').value = '';
+        document.getElementById('dueDate').value = '';
         document.getElementById('priorities').value = '--Add Priority';
         document.getElementById('teamSelection').value = '--Team Name';
         document.getElementById('projectList').value = '--Project Name';
         document.getElementById('departmentsList').value = '--Department Name';
         document.getElementById('progressLevelList').value = '--Progress Level';
+        
     }
 }
+window.onload = loadTasks;

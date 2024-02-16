@@ -24,15 +24,15 @@
         <select name="departmentList" id="department" style="color: maroon;" onchange="window.location.href = this.value">
             <option value="">DEPARTMENTS</option>
             <option value="../Departments/department1.html">Administration</option>
-            <option value="../Departments/department2.html">Finance</option>
+            <option value="../Departments/department2.html">Developers</option>
             <option value="../Departments/department3.html">Marketing</option>
         </select>
     
         <select name="priorityList" id="priority" style="color: maroon;" onchange="window.location.href = this.value">
             <option value="">PRIORITIES</option>
-            <option value="priority1.html">Low Priority</option>
+            <option value="priority1.html">High Priority</option>
             <option value="priority2.html">Medium Priority</option>
-            <option value="priority3.html">High Priority</option>
+            <option value="priority3.html">Low Priority</option>
         </select>
     
         <select name="progressList" id="progress" style="color: maroon;" onchange="window.location.href = this.value">
@@ -43,6 +43,11 @@
         </select>
     </div>
 
-    <h2>LOW PRIORITY TASKS</h2>
+    <div id="high" class="priority-container">
+        <h2>High Priority Tasks</h2>
+        <ol id="outputHigh"></ol>
+
+        <script src="priority1.js"></script>
+    </div>
 </body>
 </html>

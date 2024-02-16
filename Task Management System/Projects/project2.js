@@ -1,22 +1,22 @@
-const teamA = [];
+const project2 = [];
 
 function loadTasks() {
     var existingTasks = localStorage.getItem('tasks');
     var tasks = existingTasks ? JSON.parse(existingTasks) : [];
 
-    teamA.length = 0;
+    project2.length = 0;
 
     tasks.forEach(task => {
-        if(task.teams === 'FrontEnd'){
-            teamA.push(task);
+        if(task.project === 'HealthCare'){
+            project2.push(task);
         }
     })
 
-    updateTasks(teamA);
+    updateTasks(project2);
 }
 
 function updateTasks(tasks) {
-    var output = document.getElementById('outputTeamA')
+    var output = document.getElementById('outputProject2')
     output.innerHTML = '';
     
     tasks.forEach(task => {

@@ -38,6 +38,13 @@ function loadTasks() {
     updateTasks(document.getElementById('outputHigh'), priorityTasks);
     updateTasks(document.getElementById('outputMedium'), priorityTasks);
     updateTasks(document.getElementById('outputLow'), priorityTasks);
+
+    var progressFilter = getProgressFilter();
+    var progressTasks = tasks.filter(task => task.progress === progressFilter);
+
+    updateTasks(document.getElementById('outputTodo'), progressTasks);
+    updateTasks(document.getElementById('outputInProgress'), progressTasks);
+    updateTasks(document.getElementById('outputCompleted'), progressTasks);
 }
 
 function updateTasks(output, tasks) {
@@ -159,6 +166,10 @@ function getDeptFilter() {
 function getPriorityFilter() {
     var priorityDropper = document.getElementById('priority');
     return priorityDropper.option[priorityDropper.selectedIndex].text;
+}
+function getProgressFilter() {
+    var progressDropper = document.getElementById('progress');
+    return progressDropper.option[progressDropper.selectedIndex].text;
 }
 
 function createTask() {         

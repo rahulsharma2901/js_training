@@ -46,10 +46,49 @@ function loadTasks() {
     updateTasks(document.getElementById('outputInProgress'), progressTasks);
     updateTasks(document.getElementById('outputCompleted'), progressTasks);
 }
+function editChanges() {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const task = tasks.find(task => task.title === title)
+
+    if(task) {
+        task.contentEditable = true;
+        document.getElementById(`saveButton-${taskIndex}`).style.display = 'inline-block';
+        document.getElementById(`editButton-${taskIndex}`).style.display = 'none';
+    }
+}
+function saveChanges(taskIndex) {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const task = tasks[taskIndex];
+
+    if(task) {
+        task.title = document.getElementById(`editedTitle-${taskIndex}`).textContent;
+        task.description = document.getElementById(`editedDescription-${taskIndex}`).textContent;
+        task.dueDate = document.getElementById(`editedDueDate-${taskIndex}`).textContent;
+        task.priority =document.getElementById(`editedPiority-${taskIndex}`).textContent;
+        task.teams = document.getElementById(`editedTeams-${taskIndex}`).textContent;
+        task.project = document.getElementById(`editedProject-${taskIndex}`).textContent;
+        task.department = document.getElementById(`editedDepartment-${taskIndex}`).textContent;
+        task.progress = document.getElementById(`editedProgress-${taskIndex}`).textContent;
+
+        task.contentEditable = false;
+        document.getElementById(`saveButton-${taskIndex}`).style.display = 'none';
+        document.getElementById(`editButton-${taskIndex}`).style.display = 'inline-block';
+
+        localStorage.setItem('tasks',JSON.stringify(tasks));
+
+        loadTasks();
+    }
+}
+function deleteTask(taskIndex) {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.splice(taskIndex, 1);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    loadTasks();
+}
 
 function updateTasks(output, tasks) {
     output.innerHTML = '';
-    tasks.forEach(task => {
+    tasks.forEach((task, index) => {
         var listItem = document.createElement('li');
 
         var boxElement = document.createElement('div');
@@ -90,41 +129,24 @@ function updateTasks(output, tasks) {
 
         var editButton = document.createElement('button');
         editButton.textContent = "EDIT";
+        editButton.id = `editButton-${index}`;
         editButton.onclick = function() {
-            titleElement.contentEditable = true;
-            descriptionElement.contentEditable = true;
-            dueElement.contentEditable = true;
-            priority.contentEditable = true;
-            teams.contentEditable = true;
-            projects.contentEditable = true;
-            departments.contentEditable = true;
-            progress.contentEditable = true;
-
-            saveButton.style.display = 'inline-block';
-            editButton.style.display = 'none';
+            editChanges(task.title, index);
         };
 
         var saveButton = document.createElement('button');
         saveButton.textContent = 'SAVE';
+        saveButton.id = `saveButton-${index}`;
+        saveButton.style.display = 'none';
         saveButton.onclick = function() {
-            titleElement.contentEditable = false;
-            descriptionElement.contentEditable = false;
-            dueElement.contentEditable = false;
-            priority.contentEditable = false;
-            teams.contentEditable = false;
-            projects.contentEditable = false;
-            departments.contentEditable = false;
-            progress.contentEditable = false;
-
-            saveButton.style.display = 'none';
-            editButton.style.display = 'inline-block'
+            saveChanges(index);
         }
 
         var deleteButton = document.createElement('button');
         deleteButton.textContent = "DELETE";
         deleteButton.onclick = function() {
-            listItem.remove()
-            localStorage.removeItem(task);
+            deleteTask(index);
+            
         };
 
         listItem.appendChild(boxElement);

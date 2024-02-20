@@ -67,17 +67,11 @@ function createTask() {
 
         var editButton = document.createElement('button');
         editButton.textContent = 'EDIT';
-        editButton.onclick = function() {
-            editTask(task.length - 1);
-            console.log("object", editedIndex);
-        }
+        
 
         var deleteButton = document.createElement('button');
         deleteButton.textContent = 'DELETE';
-        deleteButton.onclick = function() {
-            listItem.remove();
-        }
-
+        
         listItem.appendChild(boxElement);
         
         output.appendChild(listItem);
@@ -91,6 +85,18 @@ function createTask() {
         boxElement.appendChild(buttonContainer);
 
         loadTasks();
+    } else if(titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() === '') {
+        alert("Warning: Please check that one more entries are not empty!")
+    } else if(titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() === '' && teamSelection.trim() !== '') {
+        alert("Warning: Please check that one more entries are not empty!")
+    } else if(titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() === '' && priorityInput.trim() !== '' && teamSelection.trim() !== '') {
+        alert("Warning: Please check that one more entries are not empty!")
+    } else if(titleInput.trim() !== '' && descriptionInput.trim() === '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() !== '') {
+        alert("Warning: Please check that one more entries are not empty!")
+    } else if(titleInput.trim() === '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() === '') {
+        alert("Warning: Please check that one more entries are not empty!")
+    } else {
+        alert("Warning: Please check that one more entries are not empty!")
     }
 }
 
@@ -112,7 +118,9 @@ function editTask(taskIndex) {
         var editTaskButton = document.getElementById('editTaskButton');
         
         editTaskButton.onclick = function () {
-            if(confirm("Are you sure you want to edit this task?") == true){
+            if(confirm("Save changes to this task?") == true){
+            document.getElementById('addTaskButton').style.visibility = "visible";
+            document.getElementById('editTaskButton').style.visibility = "hidden";
                 var editedTask = {
                     title: document.getElementById('title').value,
                     description: document.getElementById('description').value,
@@ -124,7 +132,6 @@ function editTask(taskIndex) {
                     progress: document.getElementById('progressLevelList').value
                 };
                 tasks[taskIndex] = editedTask;
-    
                 
                 console.log("Edittask----", editedTask);
                 console.log("my index", taskIndex);
@@ -135,6 +142,8 @@ function editTask(taskIndex) {
                 loadTasks();
             }
             else {
+                document.getElementById('addTaskButton').style.visibility = "visible";
+                document.getElementById('editTaskButton').style.visibility = "hidden";
                 console.log("Task not edited");
                 tasks[taskIndex] = task;
 
@@ -143,6 +152,9 @@ function editTask(taskIndex) {
                 resetInput();
                 loadTasks();
             }
+            document.getElementById('editTaskButton').style.display = "hidden";
+            document.getElementById('addTaskButton').style.visibility = "visible";
+                
             localStorage.setItem('tasks', JSON.stringify(tasks));
     
                 resetInput();
@@ -207,6 +219,8 @@ function updateTasks(output, tasks) {
         editButton.onclick = function() {
             if(confirm("Do you wish to edit this task?") == true){   
                 editTask(index);
+                document.getElementById('addTaskButton').style.visibility = "hidden";
+                document.getElementById('editTaskButton').style.visibility = "visible";
                 console.log("Task to be edited at index: ", index);
             }
             else{
@@ -216,9 +230,8 @@ function updateTasks(output, tasks) {
 
         var deleteButton = document.createElement('button');
         deleteButton.textContent = "DELETE";
-        deleteButton.onclick = function() {
-            confirm("Are you sure you want to delete this task?");
-            if(confirm === true){
+        deleteButton.onclick = function() {;
+            if(confirm("Are you sure you want to delete this task?") == true){
                 deleteTask(index);
             }
             else{
@@ -328,4 +341,5 @@ function resetInput() {
     document.getElementById('departmentsList').value = 'departments';
     document.getElementById('progressLevelList').value = 'progressLevel';
 }
+
 window.onload = loadTasks;

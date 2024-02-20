@@ -43,7 +43,7 @@
             <option value="Progress/progress3.html">Completed</option>
         </select>
     </div>
-
+    <br><br>
     <div class="main">
         <input type="text" id="title" placeholder="Add Title">
         <input type="text" id="description" placeholder="Add Description">
@@ -77,11 +77,11 @@
             <option value="TO-DO">TO-DO</option>
             <option value="In-Progress">In-Progress</option>
             <option value="Completed">Completed</option>
-        </select>
-        <button onclick="createTask()">Add Task</button>
-        <button id="editTaskButton" onclick="editTask()">Edit task</button>
+        </select><br><br>
+        <button id="addTaskButton" onclick="createTask()">Add Task</button>
+        <button id="editTaskButton" onclick="editTask()" style="visibility: hidden;">Edit task</button>
     </div>
-    <br><hr>
+    <hr>
     <h2>ALL TASKS</h2>
     <ol id="output"></ol>
     

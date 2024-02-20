@@ -277,6 +277,7 @@ function createTask() {
         var editButton = document.createElement('button');
         editButton.textContent = 'EDIT';
         editButton.onclick = function() {
+            editTask(task);
         }
 
         var saveButton = document.createElement('button');

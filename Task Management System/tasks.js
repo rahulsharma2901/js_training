@@ -67,27 +67,31 @@ function editTask(taskIndex) {
         var editTaskButton = document.getElementById('editTaskButton');
         
         editTaskButton.onclick = function () {
-            alert("Are you sure you want to edit this task?");
-            var editedTask = {
-                title: document.getElementById('title').value,
-                description: document.getElementById('description').value,
-                dueDate: document.getElementById('dueDate').value,
-                priority: document.getElementById('priorities').value,
-                teams: document.getElementById('teamSelection').value,
-                project: document.getElementById('projectList').value,
-                department: document.getElementById('departmentsList').value,
-                progress: document.getElementById('progressLevelList').value
-            };
-
-            tasks[taskIndex] = editedTask;
-
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-
-            console.log("Edittask----", editedTask);
-            console.log("my index", taskIndex);
-
-            resetInput();
-            loadTasks();
+            if(confirm("Are you sure you want to edit this task?") == true){
+                var editedTask = {
+                    title: document.getElementById('title').value,
+                    description: document.getElementById('description').value,
+                    dueDate: document.getElementById('dueDate').value,
+                    priority: document.getElementById('priorities').value,
+                    teams: document.getElementById('teamSelection').value,
+                    project: document.getElementById('projectList').value,
+                    department: document.getElementById('departmentsList').value,
+                    progress: document.getElementById('progressLevelList').value
+                };
+                tasks[taskIndex] = editedTask;
+    
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+    
+                console.log("Edittask----", editedTask);
+                console.log("my index", taskIndex);
+    
+                resetInput();
+                loadTasks();
+            }
+            else {
+                console.log("Task not edited");
+            }
+            
         }
     }
 }
@@ -142,17 +146,27 @@ function updateTasks(output, tasks) {
 
         var editButton = document.createElement('button');
         editButton.textContent = "EDIT";
-        
         editButton.id = `editButton-${index}`;
         editButton.onclick = function() {
-            editTask(index);
-            console.log("Task to be edited at index: ", index);
+            if(confirm("Do you wish to edit this task?") == true){   
+                editTask(index);
+                console.log("Task to be edited at index: ", index);
+            }
+            else{
+                console.log("Editing denied");
+            }
         };
 
         var deleteButton = document.createElement('button');
         deleteButton.textContent = "DELETE";
         deleteButton.onclick = function() {
-            deleteTask(index);
+            confirm("Are you sure you want to delete this task?");
+            if(confirm === true){
+                deleteTask(index);
+            }
+            else{
+                console.log("Denied deletion");
+            }
         };
 
         listItem.appendChild(boxElement);

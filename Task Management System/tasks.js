@@ -52,7 +52,7 @@ function loadTasks() {
 function editTask(taskIndex) {
     const task = tasks[taskIndex];
 
-    console.log('my taskkks--', task);
+    console.log('my tasks--', task);
 
     if (task) {
         document.getElementById('title').value = task.title;

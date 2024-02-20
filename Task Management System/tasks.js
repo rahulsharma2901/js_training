@@ -80,18 +80,28 @@ function editTask(taskIndex) {
                 };
                 tasks[taskIndex] = editedTask;
     
-                localStorage.setItem('tasks', JSON.stringify(tasks));
-    
+                
                 console.log("Edittask----", editedTask);
                 console.log("my index", taskIndex);
+                
+                localStorage.setItem('tasks', JSON.stringify(tasks));
     
                 resetInput();
                 loadTasks();
             }
             else {
                 console.log("Task not edited");
+                tasks[taskIndex] = task;
+
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+
+                resetInput();
+                loadTasks();
             }
-            
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+    
+                resetInput();
+                loadTasks();
         }
     }
 }

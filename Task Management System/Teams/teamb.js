@@ -58,37 +58,9 @@ function updateTasks(tasks) {
         boxElement.appendChild(departments);
         boxElement.appendChild(progress);
 
-        var saveButton = document.createElement('button');
-        saveButton.textContent = 'SAVE';
-        saveButton.onclick = function() {
-            titleElement.contentEditable = false;
-            descriptionElement.contentEditable = false;
-            dueElement.contentEditable = false;
-            priority.contentEditable = false;
-            teams.contentEditable = false;
-            projects.contentEditable = false;
-            departments.contentEditable = false;
-            progress.contentEditable = false;
-        }
-
-        var deleteButton = document.createElement('button');
-        deleteButton.textContent = "DELETE";
-        deleteButton.onclick = function() {
-            listItem.remove()
-            localStorage.removeItem(task);
-        };
-
         listItem.appendChild(boxElement);
         
         outputList.appendChild(listItem);
-
-        var buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('box-buttons');
-
-        buttonContainer.appendChild(saveButton);
-        buttonContainer.appendChild(deleteButton);
-
-        boxElement.appendChild(buttonContainer);
     })
 }
 window.onload = loadTasks

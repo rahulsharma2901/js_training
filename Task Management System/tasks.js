@@ -1,3 +1,5 @@
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
 function saveTask(task) {
     var existingTasks = localStorage.getItem('tasks');
     var tasks = existingTasks ? JSON.parse(existingTasks) : [];
@@ -46,11 +48,13 @@ function loadTasks() {
     updateTasks(document.getElementById('outputInProgress'), progressTasks);
     updateTasks(document.getElementById('outputCompleted'), progressTasks);
 }
+
 function editTask(taskIndex) {
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const task = tasks[taskIndex];
 
-    if(task) {
+    console.log('my taskkks--', task);
+
+    if (task) {
         document.getElementById('title').value = task.title;
         document.getElementById('description').value = task.description;
         document.getElementById('dueDate').value = task.dueDate;
@@ -60,38 +64,31 @@ function editTask(taskIndex) {
         document.getElementById('departmentsList').value = task.department;
         document.getElementById('progressLevelList').value = task.progress;
 
-        setEdited(taskIndex);
+        var editTaskButton = document.getElementById('editTaskButton');
+        
+        editTaskButton.onclick = function () {
+            alert("Are you sure you want to edit this task?");
+            var editedTask = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                dueDate: document.getElementById('dueDate').value,
+                priority: document.getElementById('priorities').value,
+                teams: document.getElementById('teamSelection').value,
+                project: document.getElementById('projectList').value,
+                department: document.getElementById('departmentsList').value,
+                progress: document.getElementById('progressLevelList').value
+            };
 
-        console.log("Editing the task", task);
-    }
-}
-function saveChanges() {
-    output.innerHTML = '';
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const editedIndex = getEdited();
+            tasks[taskIndex] = editedTask;
 
-    if(editedIndex !== -1) {
-        const task = tasks[editedIndex];
+            localStorage.setItem('tasks', JSON.stringify(tasks));
 
-        document.getElementById('title').value = task.title;
-        document.getElementById('description').value = task.description;
-        document.getElementById('dueDate').value = task.dueDate;
-        document.getElementById('priorities').value = task.priority;
-        document.getElementById('teamSelection').value = task.teams;
-        document.getElementById('projectList').value = task.project;
-        document.getElementById('departmentsList').value = task.department;
-        document.getElementById('progressLevelList').value = task.progress;
+            console.log("Edittask----", editedTask);
+            console.log("my index", taskIndex);
 
-        tasks[editedIndex] = task;
-
-        localStorage.setItem('tasks',JSON.stringify(tasks));
-
-        resetInput();
-        setEdited(-1);
-
-        loadTasks();
-
-        console.log("Task at index", editedIndex, "has been updated:", task);
+            resetInput();
+            loadTasks();
+        }
     }
 }
 function deleteTask(taskIndex) {
@@ -104,6 +101,7 @@ function deleteTask(taskIndex) {
 function updateTasks(output, tasks) {
     output.innerHTML = '';
     tasks.forEach((task, index) => {
+
         var listItem = document.createElement('li');
 
         var boxElement = document.createElement('div');
@@ -144,24 +142,17 @@ function updateTasks(output, tasks) {
 
         var editButton = document.createElement('button');
         editButton.textContent = "EDIT";
+        
         editButton.id = `editButton-${index}`;
         editButton.onclick = function() {
             editTask(index);
-            console.log("object", index);
+            console.log("Task to be edited at index: ", index);
         };
-
-        var saveButton = document.createElement('button');
-        saveButton.textContent = 'SAVE';
-        saveButton.id = `saveButton-${index}`;
-        saveButton.onclick = function() {
-            saveChanges();
-        }
 
         var deleteButton = document.createElement('button');
         deleteButton.textContent = "DELETE";
         deleteButton.onclick = function() {
             deleteTask(index);
-            
         };
 
         listItem.appendChild(boxElement);
@@ -172,7 +163,6 @@ function updateTasks(output, tasks) {
         buttonContainer.classList.add('box-buttons');
 
         buttonContainer.appendChild(editButton);
-        buttonContainer.appendChild(saveButton);
         buttonContainer.appendChild(deleteButton);
 
         boxElement.appendChild(buttonContainer);
@@ -277,13 +267,8 @@ function createTask() {
         var editButton = document.createElement('button');
         editButton.textContent = 'EDIT';
         editButton.onclick = function() {
-            editTask(task);
-        }
-
-        var saveButton = document.createElement('button');
-        saveButton.textContent = 'SAVE';
-        saveButton.onclick = function() {
-            saveChanges();
+            editTask(task.length - 1);
+            console.log("object", editedIndex);
         }
 
         var deleteButton = document.createElement('button');
@@ -300,23 +285,12 @@ function createTask() {
         buttonContainer.classList.add('box-buttons');
 
         buttonContainer.appendChild(editButton);
-        buttonContainer.appendChild(saveButton);
         buttonContainer.appendChild(deleteButton);
 
         boxElement.appendChild(buttonContainer);
 
         loadTasks();
     }
-}
-
-var editedTask = -1;
-
-function setEdited(task) {
-    editedTask = task;
-    console.log("object", task);
-}
-function getEdited() {
-    return editedTask;
 }
 function resetInput() {
     document.getElementById('title').value = '';
@@ -327,7 +301,5 @@ function resetInput() {
     document.getElementById('projectList').value = 'projects';
     document.getElementById('departmentsList').value = 'departments';
     document.getElementById('progressLevelList').value = 'progressLevel';
-
-    console.log("object");
 }
 window.onload = loadTasks;

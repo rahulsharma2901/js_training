@@ -219,7 +219,6 @@ function createTask() {
     var departmentsList = document.getElementById('departmentsList').value;
     var progressLevel = document.getElementById('progressLevelList').value;
     var output = document.getElementById('output');
-    var editedIndex = getEdited();
 
     if (titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() !== ''){
 
@@ -233,15 +232,6 @@ function createTask() {
             department: departmentsList,
             progress: progressLevel
         };
-
-        if (editedIndex !== -1) {
-            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-            tasks[editedIndex] = task;
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-            setEdited(-1);
-        } else {
-            saveTask(task);
-        }
 
         var listItem = document.createElement('li');
 
@@ -287,8 +277,6 @@ function createTask() {
         var editButton = document.createElement('button');
         editButton.textContent = 'EDIT';
         editButton.onclick = function() {
-            editTask(task.length - 1);
-            console.log("object", editedIndex);
         }
 
         var saveButton = document.createElement('button');
@@ -317,8 +305,6 @@ function createTask() {
         boxElement.appendChild(buttonContainer);
 
         loadTasks();
-        
-        resetInput();
     }
 }
 

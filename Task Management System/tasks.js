@@ -46,37 +46,52 @@ function loadTasks() {
     updateTasks(document.getElementById('outputInProgress'), progressTasks);
     updateTasks(document.getElementById('outputCompleted'), progressTasks);
 }
-function editChanges() {
-    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const task = tasks.find(task => task.title === title)
-
-    if(task) {
-        task.contentEditable = true;
-        document.getElementById(`saveButton-${taskIndex}`).style.display = 'inline-block';
-        document.getElementById(`editButton-${taskIndex}`).style.display = 'none';
-    }
-}
-function saveChanges(taskIndex) {
+function editTask(taskIndex) {
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const task = tasks[taskIndex];
 
     if(task) {
-        task.title = document.getElementById(`editedTitle-${taskIndex}`).textContent;
-        task.description = document.getElementById(`editedDescription-${taskIndex}`).textContent;
-        task.dueDate = document.getElementById(`editedDueDate-${taskIndex}`).textContent;
-        task.priority =document.getElementById(`editedPiority-${taskIndex}`).textContent;
-        task.teams = document.getElementById(`editedTeams-${taskIndex}`).textContent;
-        task.project = document.getElementById(`editedProject-${taskIndex}`).textContent;
-        task.department = document.getElementById(`editedDepartment-${taskIndex}`).textContent;
-        task.progress = document.getElementById(`editedProgress-${taskIndex}`).textContent;
+        document.getElementById('title').value = task.title;
+        document.getElementById('description').value = task.description;
+        document.getElementById('dueDate').value = task.dueDate;
+        document.getElementById('priorities').value = task.priority;
+        document.getElementById('teamSelection').value = task.teams;
+        document.getElementById('projectList').value = task.project;
+        document.getElementById('departmentsList').value = task.department;
+        document.getElementById('progressLevelList').value = task.progress;
 
-        task.contentEditable = false;
-        document.getElementById(`saveButton-${taskIndex}`).style.display = 'none';
-        document.getElementById(`editButton-${taskIndex}`).style.display = 'inline-block';
+        setEdited(taskIndex);
+
+        console.log("Editing the task", task);
+    }
+}
+function saveChanges() {
+    output.innerHTML = '';
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const editedIndex = getEdited();
+
+    if(editedIndex !== -1) {
+        const task = tasks[editedIndex];
+
+        document.getElementById('title').value = task.title;
+        document.getElementById('description').value = task.description;
+        document.getElementById('dueDate').value = task.dueDate;
+        document.getElementById('priorities').value = task.priority;
+        document.getElementById('teamSelection').value = task.teams;
+        document.getElementById('projectList').value = task.project;
+        document.getElementById('departmentsList').value = task.department;
+        document.getElementById('progressLevelList').value = task.progress;
+
+        tasks[editedIndex] = task;
 
         localStorage.setItem('tasks',JSON.stringify(tasks));
 
+        resetInput();
+        setEdited(-1);
+
         loadTasks();
+
+        console.log("Task at index", editedIndex, "has been updated:", task);
     }
 }
 function deleteTask(taskIndex) {
@@ -131,15 +146,15 @@ function updateTasks(output, tasks) {
         editButton.textContent = "EDIT";
         editButton.id = `editButton-${index}`;
         editButton.onclick = function() {
-            editChanges(task.title, index);
+            editTask(index);
+            console.log("object", index);
         };
 
         var saveButton = document.createElement('button');
         saveButton.textContent = 'SAVE';
         saveButton.id = `saveButton-${index}`;
-        saveButton.style.display = 'none';
         saveButton.onclick = function() {
-            saveChanges(index);
+            saveChanges();
         }
 
         var deleteButton = document.createElement('button');
@@ -194,7 +209,7 @@ function getProgressFilter() {
     return progressDropper.option[progressDropper.selectedIndex].text;
 }
 
-function createTask() {         
+function createTask() {
     var titleInput = document.getElementById('title').value;
     var descriptionInput = document.getElementById('description').value;
     var dueDateInput = document.getElementById('dueDate').value;
@@ -204,6 +219,7 @@ function createTask() {
     var departmentsList = document.getElementById('departmentsList').value;
     var progressLevel = document.getElementById('progressLevelList').value;
     var output = document.getElementById('output');
+    var editedIndex = getEdited();
 
     if (titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() !== ''){
 
@@ -217,6 +233,15 @@ function createTask() {
             department: departmentsList,
             progress: progressLevel
         };
+
+        if (editedIndex !== -1) {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks[editedIndex] = task;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            setEdited(-1);
+        } else {
+            saveTask(task);
+        }
 
         var listItem = document.createElement('li');
 
@@ -262,27 +287,14 @@ function createTask() {
         var editButton = document.createElement('button');
         editButton.textContent = 'EDIT';
         editButton.onclick = function() {
-            titleElement.contentEditable = true;
-            descriptionElement.contentEditable = true;
-            dueElement.contentEditable = true;
-            priority.contentEditable = true;
-            teams.contentEditable = true;
-            projects.contentEditable = true;
-            departments.contentEditable = true;
-            progress.contentEditable = true;
+            editTask(task.length - 1);
+            console.log("object", editedIndex);
         }
 
         var saveButton = document.createElement('button');
         saveButton.textContent = 'SAVE';
         saveButton.onclick = function() {
-            titleElement.contentEditable = false;
-            descriptionElement.contentEditable = false;
-            dueElement.contentEditable = false;
-            priority.contentEditable = false;
-            teams.contentEditable = false;
-            projects.contentEditable = false;
-            departments.contentEditable = false;
-            progress.contentEditable = false;
+            saveChanges();
         }
 
         var deleteButton = document.createElement('button');
@@ -306,15 +318,29 @@ function createTask() {
 
         loadTasks();
         
-        document.getElementById('title').value = '';
-        document.getElementById('description').value = '';
-        document.getElementById('dueDate').value = '';
-        document.getElementById('priorities').value = 'priorityLevel';
-        document.getElementById('teamSelection').value = 'teams';
-        document.getElementById('projectList').value = 'projects';
-        document.getElementById('departmentsList').value = 'departments';
-        document.getElementById('progressLevelList').value = 'progressLevel';
-        
+        resetInput();
     }
+}
+
+var editedTask = -1;
+
+function setEdited(task) {
+    editedTask = task;
+    console.log("object", task);
+}
+function getEdited() {
+    return editedTask;
+}
+function resetInput() {
+    document.getElementById('title').value = '';
+    document.getElementById('description').value = '';
+    document.getElementById('dueDate').value = '';
+    document.getElementById('priorities').value = 'priorityLevel';
+    document.getElementById('teamSelection').value = 'teams';
+    document.getElementById('projectList').value = 'projects';
+    document.getElementById('departmentsList').value = 'departments';
+    document.getElementById('progressLevelList').value = 'progressLevel';
+
+    console.log("object");
 }
 window.onload = loadTasks;

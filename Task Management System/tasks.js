@@ -225,7 +225,7 @@ function updateTasks(output, tasks) {
 
         var deleteButton = document.createElement('button');
         deleteButton.textContent = "DELETE";
-        deleteButton.onclick = function() {;
+        deleteButton.onclick = function() {
             if(confirm("Are you sure you want to delete this task?") == true){
                 deleteTask(index);
             }

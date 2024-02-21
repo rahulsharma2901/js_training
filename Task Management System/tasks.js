@@ -135,11 +135,6 @@ function editTask(taskIndex) {
                 
                 console.log("Edittask----", editedTask);
                 console.log("my index", taskIndex);
-                
-                localStorage.setItem('tasks', JSON.stringify(tasks));
-    
-                resetInput();
-                loadTasks();
             }
             else {
                 document.getElementById('addTaskButton').style.visibility = "visible";

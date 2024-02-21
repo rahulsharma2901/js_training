@@ -9,21 +9,12 @@ x = "\n";
 
 //Function Parameters
 function num(var1,var2,var3){
-    if (var1 > var2){
-        if(var1 > var3){
-            return var1;
-        }
-        else {
-            return var3;
-        }
-    }
-    else {
-        if(var2 > var3){
-            return var2;
-        }
-        else{
-            return var3;
-        }
+    if (var1 > var2 && var1 > var3){
+        return var1;
+    } else if(var2 > var1 && var2 > var3){
+        return var2;
+    } else {
+        return var3
     }
 }
 displayOutput("The largest number among the variables is: " + num(23,31,27));

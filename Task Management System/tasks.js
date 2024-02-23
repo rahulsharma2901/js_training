@@ -104,28 +104,28 @@ function createTask() {
     else {
         if (titleInput.trim() === '') {
             errorTitle.innerHTML = "*Enter title!"
-        }
+        } else { errorTitle.innerHTML = '' }
         if (descriptionInput.trim() === '') {
             errorDes.innerHTML = "*Enter Description!"
-        }
+        } else { errorDes.innerHTML = '' }
         if (dueDateInput.trim() === '') {
             errorDate.innerHTML = "*Enter valid date!"
-        }
+        } else { errorDate.innerHTML = '' }
         if (priorityInput.trim() === 'priorityLevel') {
             errorPri.innerHTML = "*Select priority!"
-        }
+        } else { errorPri.innerHTML = '' }
         if (teamSelection.trim() === 'teams') {
             errorTeam.innerHTML = "*Select team!"
-        }
+        } else { errorTeam.innerHTML = '' }
         if (projectInput.trim() === 'projects') {
             errorProject.innerHTML = "*Select project!"
-        }
+        } else { errorProject.innerHTML = '' }
         if (departmentsList.trim() === 'departments') {
             errorDep.innerHTML = '*Select department!';
-        }
+        } else { errorDep.innerHTML = '' }
         if (progressLevel.trim() === 'progressLevel') {
             errorProgress.innerHTML = "*Select progress level!";
-        }
+        } else { errorProgress.innerHTML = '' }
     }
 }
 

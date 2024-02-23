@@ -21,7 +21,7 @@ function createTask() {
     let errorDep = document.getElementById('errorDep');
     let errorProgress = document.getElementById('errorProgress');
 
-    if (titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() !== '' && individualInput.trim() !== '') {
+    if (titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() !== '' || individualInput.trim() !== '') {
 
         var task = {
             title: titleInput,

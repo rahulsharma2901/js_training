@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Management System</title>
 </head>
+
 <body>
     
     <div id="teamNav">
@@ -44,41 +45,83 @@
         </select>
     </div>
     <br><br>
-    <div class="main">
-        <input type="text" id="title" placeholder="Add Title">
-        <input type="text" id="description" placeholder="Add Description">
-        <input type="date" id="dueDate">
-        <select name="priority" id="priorities">
-            <option value="priorityLevel">--Priority Level</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-        </select>
-        <select name="teamName" id="teamSelection">
-            <option value="teams">--Team Name</option>
-            <option value="FrontEnd">FrontEnd Team</option>
-            <option value="BackEnd">BackEnd Team</option>
-            <option value="PHP">PHP Team</option>
-        </select>
-        <select name="project" id="projectList">
-            <option value="projects">--Project Name</option>
-            <option value="E-Commerce">E-Commerce</option>
-            <option value="HealthCare">HealthCare</option>
-            <option value="Advertising">Advertising</option>
-        </select>
-        <select name="dept" id="departmentsList">
-            <option value="departments">--Department Name</option>
-            <option value="Administration">Administration</option>
-            <option value="Developers">Developers</option>
-            <option value="Marketing">Marketing</option>
-        </select>
-        <select name="prog" id="progressLevelList">
-            <option value="progressLevel">--Progress Level</option>
-            <option value="TO-DO">TO-DO</option>
-            <option value="In-Progress">In-Progress</option>
-            <option value="Completed">Completed</option>
-        </select><br><br>
-        <button id="addTaskButton" onclick="createTask()">Add Task</button>
+    <div class="main" style="display: flex; justify-content: space-around;">
+        <div>
+            Title*<br>
+            <input type="text" id="title" placeholder="Add Title">
+            <p id="errorTitle" style="color: red;"></p>
+
+        </div>
+        <div>
+            Description*<br>
+            <input type="text" id="description" placeholder="Add Description">
+            <p id="errorDes" style="color: red;"></p>
+
+        </div>
+
+        <div>
+            Date*<br>
+            <input type="date" id="dueDate">
+            <p id="errorDate" style="color: red;"></p>
+        </div>
+        <div>
+            Priority*<br>
+            <select name="priority" id="priorities">
+                <option value="priorityLevel">Select Priority</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+            </select>
+            <p id="errorPri" style="color: red;"></p>
+        </div>
+        <div>
+            Team*<br>
+            <select name="teamName" id="teamSelection">
+                <option value="teams">Select Team</option>
+                <option value="FrontEnd">FrontEnd Team</option>
+                <option value="BackEnd">BackEnd Team</option>
+                <option value="PHP">PHP Team</option>
+            </select>
+            <p id="errorTeam" style="color: red;"></p>
+        </div>
+        <div>
+            Project*<br>
+            <select name="project" id="projectList">
+                <option value="projects">Select Project</option>
+                <option value="E-Commerce">E-Commerce</option>
+                <option value="HealthCare">HealthCare</option>
+                <option value="Advertising">Advertising</option>
+            </select>
+            <p id="errorProject" style="color: red;"></p>
+        </div>
+        <div>
+            Department*<br>
+            <select name="dept" id="departmentsList">
+                <option value="departments">Select Department</option>
+                <option value="Administration">Administration</option>
+                <option value="Developers">Developers</option>
+                <option value="Marketing">Marketing</option>
+            </select>
+            <p id="errorDep" style="color: red;"></p>
+        </div>
+        <div>
+            Progress*<br>
+            <select name="prog" id="progressLevelList">
+                <option value="progressLevel">Select Progress</option>
+                <option value="TO-DO">TO-DO</option>
+                <option value="In-Progress">In-Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+            <p id="errorProgress" style="color: red;"></p>
+        </div>
+        <div>
+            Employee Name<br>
+            <input type="text" id="individual" placeholder="Enter Employee Name">
+            <p id="errorName" style="color: red;"></p>
+        </div>
+    </div>
+    <div  style="display: flex; justify-content: start; padding-left: 15px;">
+        <button id="addTaskButton" onclick="createTask()" style="visibility: visible;">Add Task</button>
         <button id="editTaskButton" onclick="editTask()" style="visibility: hidden;">Edit task</button>
     </div>
     <hr>

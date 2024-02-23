@@ -9,9 +9,19 @@ function createTask() {
     var projectInput = document.getElementById('projectList').value;
     var departmentsList = document.getElementById('departmentsList').value;
     var progressLevel = document.getElementById('progressLevelList').value;
+    var individualInput = document.getElementById('individual').value;
     var output = document.getElementById('output');
 
-    if (titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() !== ''){
+    let errorTitle = document.getElementById("errorTitle")
+    let errorDes = document.getElementById("errorDes")
+    let errorDate = document.getElementById("errorDate");
+    let errorPri = document.getElementById('errorPri');
+    let errorTeam = document.getElementById('errorTeam');
+    let errorProject = document.getElementById('errorProject');
+    let errorDep = document.getElementById('errorDep');
+    let errorProgress = document.getElementById('errorProgress');
+
+    if (titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() !== '' && individualInput.trim() !== '') {
 
         var task = {
             title: titleInput,
@@ -21,7 +31,8 @@ function createTask() {
             teams: teamSelection,
             project: projectInput,
             department: departmentsList,
-            progress: progressLevel
+            progress: progressLevel,
+            individual: individualInput
         };
 
         var listItem = document.createElement('li');
@@ -29,7 +40,7 @@ function createTask() {
         var boxElement = document.createElement('div');
         boxElement.classList.add('output-box');
 
-	    var titleElement = document.createElement('h4');
+        var titleElement = document.createElement('h4');
         titleElement.textContent = titleInput;
 
         var descriptionElement = document.createElement('p');
@@ -53,7 +64,9 @@ function createTask() {
         var progress = document.createElement('p');
         progress.textContent = "Progress Level: " + progressLevel;
 
-        
+        var individualElement = document.createElement('p');
+        individualElement.textContent = "Employee Name: " + individualInput;
+
         boxElement.appendChild(titleElement);
         boxElement.appendChild(descriptionElement);
         boxElement.appendChild(dueElement);
@@ -62,18 +75,19 @@ function createTask() {
         boxElement.appendChild(projects);
         boxElement.appendChild(departments);
         boxElement.appendChild(progress);
-        
+        boxElement.appendChild(individualElement);
+
         saveTask(task);
 
         var editButton = document.createElement('button');
         editButton.textContent = 'EDIT';
-        
+
 
         var deleteButton = document.createElement('button');
         deleteButton.textContent = 'DELETE';
-        
+
         listItem.appendChild(boxElement);
-        
+
         output.appendChild(listItem);
 
         var buttonContainer = document.createElement('div');
@@ -83,27 +97,43 @@ function createTask() {
         buttonContainer.appendChild(deleteButton);
 
         boxElement.appendChild(buttonContainer);
-
+        
+        resetInput();
         loadTasks();
-    } else if(titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() === '') {
-        alert("Warning: Please check that one more entries are not empty!")
-    } else if(titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() === '' && teamSelection.trim() !== '') {
-        alert("Warning: Please check that one more entries are not empty!")
-    } else if(titleInput.trim() !== '' && descriptionInput.trim() !== '' && dueDateInput.trim() === '' && priorityInput.trim() !== '' && teamSelection.trim() !== '') {
-        alert("Warning: Please check that one more entries are not empty!")
-    } else if(titleInput.trim() !== '' && descriptionInput.trim() === '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() !== '') {
-        alert("Warning: Please check that one more entries are not empty!")
-    } else if(titleInput.trim() === '' && descriptionInput.trim() !== '' && dueDateInput.trim() !== '' && priorityInput.trim() !== '' && teamSelection.trim() === '') {
-        alert("Warning: Please check that one more entries are not empty!")
-    } else {
-        alert("Warning: Please check that one more entries are not empty!")
+    }
+    else {
+        if (titleInput.trim() === '') {
+            errorTitle.innerHTML = "*Enter title!"
+        }
+        if (descriptionInput.trim() === '') {
+            errorDes.innerHTML = "*Enter Description!"
+        }
+        if (dueDateInput.trim() === '') {
+            errorDate.innerHTML = "*Enter valid date!"
+        }
+        if (priorityInput.trim() === 'priorityLevel') {
+            errorPri.innerHTML = "*Select priority!"
+        }
+        if (teamSelection.trim() === 'teams') {
+            errorTeam.innerHTML = "*Select team!"
+        }
+        if (projectInput.trim() === 'projects') {
+            errorProject.innerHTML = "*Select project!"
+        }
+        if (departmentsList.trim() === 'departments') {
+            errorDep.innerHTML = '*Select department!';
+        }
+        if (progressLevel.trim() === 'progressLevel') {
+            errorProgress.innerHTML = "*Select progress level!";
+        }
     }
 }
 
-function editTask(taskIndex) {
-    const task = tasks[taskIndex];
-
-    console.log('my tasks--', task);
+function editTask(index) {
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    var task = tasks[index];
+    
+    console.log('my taskss--', task);
 
     if (task) {
         document.getElementById('title').value = task.title;
@@ -114,46 +144,34 @@ function editTask(taskIndex) {
         document.getElementById('projectList').value = task.project;
         document.getElementById('departmentsList').value = task.department;
         document.getElementById('progressLevelList').value = task.progress;
+        document.getElementById('individual').value = task.individual;
 
         var editTaskButton = document.getElementById('editTaskButton');
-        
+
         editTaskButton.onclick = function () {
-            if(confirm("Save changes to this task?") == true){
+            var editedTask = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                dueDate: document.getElementById('dueDate').value,
+                priority: document.getElementById('priorities').value,
+                teams: document.getElementById('teamSelection').value,
+                project: document.getElementById('projectList').value,
+                department: document.getElementById('departmentsList').value,
+                progress: document.getElementById('progressLevelList').value,
+                individual: document.getElementById('individual').value
+            };
             document.getElementById('addTaskButton').style.visibility = "visible";
             document.getElementById('editTaskButton').style.visibility = "hidden";
-                var editedTask = {
-                    title: document.getElementById('title').value,
-                    description: document.getElementById('description').value,
-                    dueDate: document.getElementById('dueDate').value,
-                    priority: document.getElementById('priorities').value,
-                    teams: document.getElementById('teamSelection').value,
-                    project: document.getElementById('projectList').value,
-                    department: document.getElementById('departmentsList').value,
-                    progress: document.getElementById('progressLevelList').value
-                };
-                tasks[taskIndex] = editedTask;
-                
-                console.log("Edittask----", editedTask);
-                console.log("my index", taskIndex);
-            }
-            else {
-                document.getElementById('addTaskButton').style.visibility = "visible";
-                document.getElementById('editTaskButton').style.visibility = "hidden";
-                console.log("Task not edited");
-                tasks[taskIndex] = task;
 
-                localStorage.setItem('tasks', JSON.stringify(tasks));
+            tasks[index] = editedTask;
 
-                resetInput();
-                loadTasks();
-            }
-            document.getElementById('editTaskButton').style.display = "hidden";
-            document.getElementById('addTaskButton').style.visibility = "visible";
-                
             localStorage.setItem('tasks', JSON.stringify(tasks));
-    
-                resetInput();
-                loadTasks();
+            
+            console.log("Edittask----", editedTask);
+            console.log("my index", index);
+            
+            resetInput();
+            loadTasks();
         }
     }
 }
@@ -169,13 +187,12 @@ function saveTask(task) {
 function updateTasks(output, tasks) {
     output.innerHTML = '';
     tasks.forEach((task, index) => {
-
         var listItem = document.createElement('li');
 
         var boxElement = document.createElement('div');
         boxElement.classList.add('output-box');
-	
-	    var titleElement = document.createElement('h4');
+
+        var titleElement = document.createElement('h4');
         titleElement.textContent = task.title;
 
         var descriptionElement = document.createElement('p');
@@ -199,6 +216,9 @@ function updateTasks(output, tasks) {
         var progress = document.createElement('p');
         progress.textContent = "Progress Level: " + task.progress;
 
+        var individualElement = document.createElement('p');
+        individualElement.textContent = "Employee Name: " + task.individual;
+
         boxElement.appendChild(titleElement);
         boxElement.appendChild(descriptionElement);
         boxElement.appendChild(dueElement);
@@ -207,35 +227,31 @@ function updateTasks(output, tasks) {
         boxElement.appendChild(projects);
         boxElement.appendChild(departments);
         boxElement.appendChild(progress);
+        boxElement.appendChild(individualElement);
 
         var editButton = document.createElement('button');
         editButton.textContent = "EDIT";
         editButton.id = `editButton-${index}`;
-        editButton.onclick = function() {
-            if(confirm("Do you wish to edit this task?") == true){   
-                editTask(index);
-                document.getElementById('addTaskButton').style.visibility = "hidden";
-                document.getElementById('editTaskButton').style.visibility = "visible";
-                console.log("Task to be edited at index: ", index);
-            }
-            else{
-                console.log("Editing denied");
-            }
-        };
+        editButton.onclick = function () {
+            // if(confirm("Do you wish to edit this task?") == true){   
+            editTask(index);
+            console.log("Task to be edited at index: ", index);
+            document.getElementById('addTaskButton').style.visibility = "hidden";
+            document.getElementById('editTaskButton').style.visibility = "visible"
+        }
+        //     else{
+        //         console.log("Editing denied");
+        //     }
+        // };
 
         var deleteButton = document.createElement('button');
         deleteButton.textContent = "DELETE";
-        deleteButton.onclick = function() {
-            if(confirm("Are you sure you want to delete this task?") == true){
-                deleteTask(index);
-            }
-            else{
-                console.log("Denied deletion");
-            }
-        };
+        deleteButton.onclick = function () {
+            deleteTask(index);
+        }
 
         listItem.appendChild(boxElement);
-        
+
         output.appendChild(listItem);
 
         var buttonContainer = document.createElement('div');
@@ -245,7 +261,7 @@ function updateTasks(output, tasks) {
         buttonContainer.appendChild(deleteButton);
 
         boxElement.appendChild(buttonContainer);
-        
+
         document.getElementById('title').value = '';
         document.getElementById('description').value = '';
         document.getElementById('dueDate').value = '';
@@ -254,7 +270,8 @@ function updateTasks(output, tasks) {
         document.getElementById('projectList').value = 'projects';
         document.getElementById('departmentsList').value = 'departments';
         document.getElementById('progressLevelList').value = 'progressLevel';
-    })
+        document.getElementById('individual').value = '';
+    });
 }
 
 
@@ -335,6 +352,7 @@ function resetInput() {
     document.getElementById('projectList').value = 'projects';
     document.getElementById('departmentsList').value = 'departments';
     document.getElementById('progressLevelList').value = 'progressLevel';
+    document.getElementById('individual').value = '';
 }
 
 window.onload = loadTasks;

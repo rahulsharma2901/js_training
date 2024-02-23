@@ -233,16 +233,11 @@ function updateTasks(output, tasks) {
         editButton.textContent = "EDIT";
         editButton.id = `editButton-${index}`;
         editButton.onclick = function () {
-            // if(confirm("Do you wish to edit this task?") == true){   
             editTask(index);
             console.log("Task to be edited at index: ", index);
             document.getElementById('addTaskButton').style.visibility = "hidden";
             document.getElementById('editTaskButton').style.visibility = "visible"
         }
-        //     else{
-        //         console.log("Editing denied");
-        //     }
-        // };
 
         var deleteButton = document.createElement('button');
         deleteButton.textContent = "DELETE";
